@@ -1,0 +1,544 @@
+  ________________________________________________________ 
+ |                                                        |
+ |          P R O G R A M   F U L L E R E N E             |
+ |    Fortran/C++ Program for the topological analysis    |
+ |      of regular fullerenes (pentagons and hexagons)    |
+ |    Written by Peter Schwerdtfeger, Lukas Wirz          |
+ |         and James Avery with routines from             |
+ |            Fowler, Manolopoulos and Babic              |
+ |    Massey University,  Auckland,  New Zealand          |
+ |    First version: 1.0                from 08/06/10     |
+ |    This  version: 4.5, last revision from 03/09/15     |
+ |________________________________________________________|
+
+ Date: 14/ 9/2017          Time: 18h 9m 8s
+ Limited to   5000 Atoms
+ For citation when running this program use:
+ 1) P. Schwerdtfeger, L. Wirz, J. Avery, Program Fullerene - A Software Package for Constructing and Analyzing Structures of Regular Fullerenes (Version 4.4), J. Comput. Chem.,in press.
+ If possible also cite the folowing two references:
+ 2) P. W. Fowler, D. E. Manolopoulos, An Atlas of Fullerenes (Dover Publ., New York, 2006).
+ 3) D. Babic, Nomenclature and Coding of Fullerenes, J. Chem. Inf. Comput. Sci. 35, 515-526 (1995).
+ See the Manual for further literature and input instructions concerning this program
+--------------------------------------------------------------------------------------------------------------------------------------------
+ --> Enter Subroutine DATAIN         
+ --------------------------------------------------------------------------------
+ I N P U T 
+ 0........1.........2.........3.........4.........5.........6.........7.........8
+ 12345678901234567890123456789012345678901234567890123456789012345678901234567890
+
+ C29 test
+
+ &General NA=20 /
+ &Coord ICart=1 /
+ &FFChoice /
+ &FFParameters /
+ &Hamilton /
+ &Isomers /
+ &Graph /
+ 6 1.5691 -0.6566 -0.9364
+ 6 1.7669 0.6431 -0.4720
+ 6 0.4705 -0.6652 -1.7927
+ 6 0.0116 0.6478 -1.8255
+ 6 0.7930 1.4673 -1.0284
+ 6 -0.4874 -1.4818 -1.2157
+ 6 -1.5635 -0.6572 -0.8952
+ 6 -1.2694 0.6490 -1.2767
+ 6 -0.0023 -1.9618 -0.0072
+ 6 -0.7698 -1.4532 1.0359
+ 6 -1.7576 -0.6380 0.4742
+ 6 1.2878 -1.4503 0.1629
+ 6 1.2896 -0.6595 1.3047
+ 6 0.0115 -0.6460 1.8533
+ 6 1.5830 0.6454 0.8984
+ 6 0.4848 1.4383 1.1937
+ 6 -0.5032 0.6469 1.7753
+ 6 -1.6062 0.6715 0.9231
+ 6 -1.2959 1.4891 -0.1655
+ 6 -0.0102 1.9727 -0.0063
+
+ ------------------------------------------------------------------------------------------------------------------------------------
+ C29 test
+ ------------------------------------------------------------------------------------------------------------------------------------
+ Minimum bond distance set to default value taken from C60 bond distance:     1.391000
+
+ Number of Atoms:   20, and distance tolerance:        33.00%
+--------------------------------------------------------------------------------------------------------------------------------------------
+ --> Enter Subroutine ISOMERS        
+
+ Data for isomer numbers from House of Graphs website: http://hog.grinvin.org/
+ Number of possible fullerene isomers:          1 (IPR isomers:          0)
+--------------------------------------------------------------------------------------------------------------------------------------------
+ --> Enter Subroutine MOVECM_1       
+
+ Convert cartesian into internal coordinates:
+    N1         R          Angle      Dihedral    N2    N3    N4
+ ----------------------------------------------------------------
+     1     0.000000     0.000000     0.000000     0     0     0
+     2     1.394278     0.000000     0.000000     1     0     0
+     3     1.392927   108.808258     0.000000     1     2     0
+     4     1.391271   105.593625     0.340161     3     1     2
+     5     1.384751   111.027261    -0.435328     4     3     1
+     6     1.384679   107.042641   117.264237     3     1     2
+     7     1.393082   106.329657  -114.586392     6     3     1
+     8     1.392191   109.216426    -0.227403     7     6     3
+     9     1.387874   108.966301    -0.819238     6     3     1
+    10     1.391326   109.486403  -114.521604     9     6     3
+    11     1.383221   110.143845   116.684592     7     6     3
+    12     1.384756   107.379145   117.745407     1     2     3
+    13     1.388911   109.026781    -0.801219    12     1     2
+    14     1.389296   110.076086   116.380323    10     9     6
+    15     1.382686   108.227940  -116.669161     2     1     3
+    16     1.386339   108.507234   115.828792    15     2     1
+    17     1.393096   109.015569  -116.764682    16    15     2
+    18     1.392560   108.477461  -119.439809    11     7     6
+    19     1.393282   110.069188   119.900954     8     7     6
+    20     1.382837   106.558845  -116.035588    19     8     7
+ Analysis of distances: All are bond distances
+ In this list: Smallest distance:     1.382686, Largest distance:     1.394278
+
+ Shift Molecule to the centre of points:
+ Original Centre: 0.115000000D-03 0.750000000D-04 -.500000000D-05
+ New Coordinates:
+     I      Z Element Cartesian Coordinates
+     1      6  C      0.156898500000D+01  -.656675000000D+00  -.936395000000D+00
+     2      6  C      0.176678500000D+01  0.643025000000D+00  -.471995000000D+00
+     3      6  C      0.470385000000D+00  -.665275000000D+00  -.179269500000D+01
+     4      6  C      0.114850000000D-01  0.647725000000D+00  -.182549500000D+01
+     5      6  C      0.792885000000D+00  0.146722500000D+01  -.102839500000D+01
+     6      6  C      -.487515000000D+00  -.148187500000D+01  -.121569500000D+01
+     7      6  C      -.156361500000D+01  -.657275000000D+00  -.895195000000D+00
+     8      6  C      -.126951500000D+01  0.648925000000D+00  -.127669500000D+01
+     9      6  C      -.241500000000D-02  -.196187500000D+01  -.719500000000D-02
+    10      6  C      -.769915000000D+00  -.145327500000D+01  0.103590500000D+01
+    11      6  C      -.175771500000D+01  -.638075000000D+00  0.474205000000D+00
+    12      6  C      0.128768500000D+01  -.145037500000D+01  0.162905000000D+00
+    13      6  C      0.128948500000D+01  -.659575000000D+00  0.130470500000D+01
+    14      6  C      0.113850000000D-01  -.646075000000D+00  0.185330500000D+01
+    15      6  C      0.158288500000D+01  0.645325000000D+00  0.898405000000D+00
+    16      6  C      0.484685000000D+00  0.143822500000D+01  0.119370500000D+01
+    17      6  C      -.503315000000D+00  0.646825000000D+00  0.177530500000D+01
+    18      6  C      -.160631500000D+01  0.671425000000D+00  0.923105000000D+00
+    19      6  C      -.129601500000D+01  0.148902500000D+01  -.165495000000D+00
+    20      6  C      -.103150000000D-01  0.197262500000D+01  -.629500000000D-02
+
+ Moment of inertia with setting the masses to unity:
+ Eigenvalues (principal axis system):  0.512265287003D+02 0.505532323196D+02 0.502553838451D+02
+ Using C60 ideal icosahedron to normalize eigenvalues (497.37 Angstroem^2)
+ Eigenvalues (normalized):  0.102994964D+00 0.101641249D+00 0.101042401D+00
+ Sphericity parameter normed to largest rotational constant: 0.237898820D-01
+ Fullerene is distorted symmetric top
+--------------------------------------------------------------------------------------------------------------------------------------------
+ --> Enter Subroutine DIAMETER       
+
+  Atom-to-atom largest diameters obtained from inversion through center of points sorted largest to smallest: (   10 values)
+ (    9,   20) 0.39345080D+01 (   12,   19) 0.39272668D+01 (    3,   17) 0.39243244D+01 (    1,   18) 0.39120481D+01 (    6,   16) 0.39086270D+01
+ (    5,   10) 0.39029474D+01 (    4,   14) 0.38996779D+01 (    2,   11) 0.38676365D+01 (    8,   13) 0.38631955D+01 (    7,   15) 0.38489258D+01
+--------------------------------------------------------------------------------------------------------------------------------------------
+ --> Enter Subroutine DISTANCEMATRIX 
+
+ Minimum distance  0.13826860D+01 between atoms     2 and    15
+ Maximum distance  0.39345080D+01 between atoms     9 and    20
+  Radius of covering central sphere  0.19809692D+01
+  Volume of covering central sphere (upper limit) 0.32562802D+02 in units cube of distances
+  Area of covering central sphere (upper limit)   0.49313441D+02 in units square of distances
+  Area to volume ratio of covering central sphere (3/R)  0.15144102D+01 in units of inverse distance
+  Radius of dodecahedron:  0.19375006D+01 and edge length:  0.13826860D+01
+  Volume of ideal dodecahedron for C20: 0.20257054D+02
+--------------------------------------------------------------------------------------------------------------------------------------------
+ --> Enter Subroutine CONNECT        
+
+  Number of connected surface atoms (edges, bonds):    30
+  Connectivities (edge set):
+ { 1, 2} { 1, 3} { 1,12} { 2, 5} { 2,15} { 3, 4} { 3, 6} { 4, 5} { 4, 8} { 5,20} { 6, 7} { 6, 9} 
+ { 7, 8} { 7,11} { 8,19} { 9,10} { 9,12} {10,11} {10,14} {11,18} {12,13} {13,14} {13,15} {14,17} 
+ {15,16} {16,17} {16,20} {17,18} {18,19} {19,20} {
+  Calculate all vertices N and corresponding adjacencies Ni of 3-connected graph:
+     N        N1   N2   N3
+     1    (     2     3    12)
+     2    (     1     5    15)
+     3    (     1     4     6)
+     4    (     3     5     8)
+     5    (     2     4    20)
+     6    (     3     7     9)
+     7    (     6     8    11)
+     8    (     4     7    19)
+     9    (     6    10    12)
+    10    (     9    11    14)
+    11    (     7    10    18)
+    12    (     1     9    13)
+    13    (    12    14    15)
+    14    (    10    13    17)
+    15    (     2    13    16)
+    16    (    15    17    20)
+    17    (    14    16    18)
+    18    (    11    17    19)
+    19    (     8    18    20)
+    20    (     5    16    19)
+--------------------------------------------------------------------------------------------------------------------------------------------
+ --> Enter Subroutine REORDER        
+ Enter Subroutine Permute
+ Number of permutations for cartesian coordinates performed:     0
+--------------------------------------------------------------------------------------------------------------------------------------------
+ --> Enter Subroutine HUECKEL        
+
+ Construct the (   20,   20) Hueckel matrix
+
+ Diagonalize Hueckel matrix (E=alpha+x*beta; E in au)
+ Eigenvalues are between [-3,+3] (in units of |beta|)
+ deg: degeneracy; NE: number of electrons
+        x             E    deg NE   type    
+ ---------------------------------------------
+     3.000000    -0.543000  1   2   (occupied)
+     2.236068    -0.458204  3   6   (occupied)
+     1.000000    -0.321000  5  10   (occupied)
+     0.000000    -0.210000  4   2   (fractocc)
+    -2.000000     0.012000  4   0   (empty)   
+    -2.236068     0.038204  3   0   (empty)   
+ ---------------------------------------------
+ Total pi-energy in units of beta:    29.416408
+ Total resonance energy per atom in units of beta according to Babic:    -0.055656 (graphene limit:     0.046800)
+ Difference of total resonance energy per atom compared to C60 in units of beta:    -0.083862
+ Difference of total resonance energy per atom compared to C60 in kcal/mol:     5.841300
+ beta used in this program in atomic units:   -0.111
+ Scaling of  3.10 applied to represent DFT value: 
+  Difference of total resonance energy per atom compared to C60 in kcal/mol:    18.108030
+ Total resonance energy in units of beta:     9.416408 (per atom:     0.470820)
+ Total resonance energy in atomic units    -1.045221 (per atom:    -0.052261)
+ Estrada index:        66.608328 and bipartivity index:     0.97918520
+ Hueckel theory indicates that fullerene has open-shell character (zero band gap)!
+
+ Spectral moments M(I):
+ --------------------------
+  0                      20.
+  1                       0.
+  2                      60.
+  3                       0.
+  4                     300.
+  5                     120.
+  6                    1740.
+  7                    1680.
+  8                   11340.
+  9                   17640.
+ 10                   81900.
+ 11                  168960.
+ 12                  641580.
+ 13                 1561560.
+ 14                 5317260.
+ 15                14217840.
+--------------------------------------------------------------------------------------------------------------------------------------------
+ --> Enter Subroutine HAMILTON       
+ Exact limits for Hamiltonian cycles. Lower limit =     30, upper limit=      30
+ Epstein upper limit for Hamiltonian cycles in cubic graphs:                 101.
+ Modified Epstein upper limit for Hamiltonian cycles in fullerene graphs:                  30.
+--------------------------------------------------------------------------------------------------------------------------------------------
+ --> Enter Subroutine RING           
+
+  12 five-membered-rings identified
+ Atom numbers in ring, Ni, mean distance, dm, and root mean square deviation for distances, RMSD, and distances in the ring:
+    N1    N2    N3    N4    N5         dm           RMSD               R1            R2            R3            R4            R5
+     2     5     4     3     1    0.139102D+01  0.329798D-02       0.139189D+01  0.138475D+01  0.139127D+01  0.139293D+01  0.139428D+01
+     2    15    13    12     1    0.138969D+01  0.567993D-02       0.138269D+01  0.139783D+01  0.138891D+01  0.138476D+01  0.139428D+01
+     3     6     9    12     1    0.138968D+01  0.520398D-02       0.138468D+01  0.138787D+01  0.139819D+01  0.138476D+01  0.139293D+01
+     5    20    16    15     2    0.139188D+01  0.728013D-02       0.139472D+01  0.140378D+01  0.138634D+01  0.138269D+01  0.139189D+01
+     4     8     7     6     3    0.139097D+01  0.324260D-02       0.139361D+01  0.139219D+01  0.139308D+01  0.138468D+01  0.139127D+01
+     5    20    19     8     4    0.138984D+01  0.499641D-02       0.139472D+01  0.138284D+01  0.139328D+01  0.139361D+01  0.138475D+01
+     7    11    10     9     6    0.139080D+01  0.511475D-02       0.138322D+01  0.139850D+01  0.139133D+01  0.138787D+01  0.139308D+01
+     8    19    18    11     7    0.139152D+01  0.440196D-02       0.139328D+01  0.139635D+01  0.139256D+01  0.138322D+01  0.139219D+01
+    10    14    13    12     9    0.139173D+01  0.335715D-02       0.138930D+01  0.139093D+01  0.138891D+01  0.139819D+01  0.139133D+01
+    11    18    17    14    10    0.139364D+01  0.296240D-02       0.139256D+01  0.139408D+01  0.139377D+01  0.138930D+01  0.139850D+01
+    14    17    16    15    13    0.139239D+01  0.376127D-02       0.139377D+01  0.139310D+01  0.138634D+01  0.139783D+01  0.139093D+01
+    17    18    19    20    16    0.139403D+01  0.673341D-02       0.139408D+01  0.139635D+01  0.138284D+01  0.140378D+01  0.139310D+01
+  5-ring minimum bond distance: 0.138269D+01    maximum bond distance: 0.140378D+01
+  5-ring minimum bond angle (deviation from 108 deg): 105.46 (   -2.54), maximum bond angle: 111.03 (    3.03)
+
+      0 six-membered-rings identified
+
+ List of ring numbers RNj containing vertex Ni  (Ni: RNj, RNk, RNl)
+ ---------------------------------------------------------------------------------------------------------------------------------------
+ (    1:    1,    2,    3)  (    2:    1,    2,    4)  (    3:    1,    3,    5)  (    4:    1,    5,    6)  (    5:    1,    4,    6) 
+ (    6:    3,    5,    7)  (    7:    5,    7,    8)  (    8:    5,    6,    8)  (    9:    3,    7,    9)  (   10:    7,    9,   10) 
+ (   11:    7,    8,   10)  (   12:    2,    3,    9)  (   13:    2,    9,   11)  (   14:    9,   10,   11)  (   15:    2,    4,   11) 
+ (   16:    4,   11,   12)  (   17:   10,   11,   12)  (   18:    8,   10,   12)  (   19:    6,    8,   12)  (   20:    4,    6,   12) 
+
+
+ Checking the Euler polyhedron formula:
+ Number of vertices Nv:     20
+ Number of edges Ne:        30
+ Number of faces Nf:        12
+ Euler number Nv-Ne+Nf:      2 (should be 2 for spherical polyhedra or planar connected graphs)
+ Number of pentagons:       12
+ Number of hexagons:         0
+ Mv=    20  Me=    30
+  Minimum bond distance in 5-ring: 0.138269D+01    maximum bond distance in 5-ring: 0.140378D+01
+
+ Number of different bond distances Nr=  15 and Nr/Ne= 0.500000D+00 (within tolerance .5D-03),  Nonequivalent bond distances:
+ 0.139189D+01  0.138475D+01  0.139127D+01  0.139293D+01  0.139428D+01  0.138269D+01  0.139783D+01  0.138891D+01  0.138787D+01  0.140378D+01
+ 0.138634D+01  0.139361D+01  0.138322D+01  0.139850D+01  0.139635D+01
+--------------------------------------------------------------------------------------------------------------------------------------------
+ --> Enter Subroutine RINGC          
+
+ Center for 5-rings
+  Ring Number RN, Atom Numbers Ni, Ring centers X,Y,Z and distances di from ring center to atoms
+  RN       N1    N2    N3    N4    N5         X            Y            Z            d1           d2           d3           d4           d5
+   1        2     5     4     3     1   0.922105D+00 0.287205D+00 -.121100D+01   0.117738D+01 0.120104D+01 0.115621D+01 0.120401D+01 0.117676D+01
+   2        2    15    13    12     1   0.149917D+01 -.295655D+00 0.191525D+00   0.118025D+01 0.117989D+01 0.118978D+01 0.117427D+01 0.118634D+01
+   3        3     6     9    12     1   0.567425D+00 -.124322D+01 -.757815D+00   0.118929D+01 0.117453D+01 0.118517D+01 0.118719D+01 0.117433D+01
+   4        5    20    16    15     2   0.923385D+00 0.123328D+01 0.117085D+00   0.117639D+01 0.119735D+01 0.118050D+01 0.117945D+01 0.118606D+01
+   5        4     8     7     6     3   -.567755D+00 -.301555D+00 -.140116D+01   0.119026D+01 0.118801D+01 0.117229D+01 0.119749D+01 0.116762D+01
+   6        5    20    19     8     4   -.354295D+00 0.124511D+01 -.860475D+00   0.118049D+01 0.117355D+01 0.119555D+01 0.116889D+01 0.119244D+01
+   7        7    11    10     9     6   -.916235D+00 -.123848D+01 -.121595D+00   0.116420D+01 0.119312D+01 0.118632D+01 0.117109D+01 0.120004D+01
+   8        8    19    18    11     7   -.149863D+01 0.302805D+00 -.188015D+00   0.116513D+01 0.120361D+01 0.117561D+01 0.117937D+01 0.119419D+01
+   9       10    14    13    12     9   0.363245D+00 -.123424D+01 0.869925D+00   0.116601D+01 0.119866D+01 0.117354D+01 0.118372D+01 0.119687D+01
+  10       11    18    17    14    10   -.925175D+00 -.283835D+00 0.121237D+01   0.116769D+01 0.120836D+01 0.116662D+01 0.119129D+01 0.119283D+01
+  11       14    17    16    15    13   0.573025D+00 0.284945D+00 0.140509D+01   0.117607D+01 0.119437D+01 0.117581D+01 0.118592D+01 0.118975D+01
+  12       17    18    19    20    16   -.586255D+00 0.124362D+01 0.744065D+00   0.119436D+01 0.118321D+01 0.117953D+01 0.119423D+01 0.117769D+01
+
+ Pentagon to pentagon distance: smallest 0.160821D+01, largest 0.312586D+01
+
+ Analyzing basic two- and three-ring fusions
+
+ 2-ring fusions between rings (RNI,RNJ):
+  (5-5) fusions:    30 in total
+ (    1,    2) (    1,    3) (    1,    4) (    1,    5) (    1,    6) (    2,    3) (    2,    4) (    2,    9) (    2,   11) (    3,    5) (    3,    7) (    3,    9)
+ (    4,    6) (    4,   11) (    4,   12) (    5,    6) (    5,    7) (    5,    8) (    6,    8) (    6,   12) (    7,    8) (    7,    9) (    7,   10) (    8,   10)
+ (    8,   12) (    9,   10) (    9,   11) (   10,   11) (   10,   12) (   11,   12) (
+ Total number of distinct two-ring fusions:   30 (should be identical to the number of edges Ne)
+
+ Rhagavachari-Fowler-Manolopoulos neighboring pentagon indices: ( 0, 0, 0, 0, 0,12) and number of fused pentagon pairs (pentagon signature) Np: 30
+ Number of (5,5) fusions matches the 30 value obtained from Rhagavachari-/Fowler-Manolopoulos neighboring pentagon indices
+
+
+ 3-ring fusions between rings (RNI,RNJ,RNK):
+  closed (5-5-5) fusions:    20
+  open   (5-5-5) fusions:    60
+ Total number of distinct three-ring fusions:    80 (expected:     80)
+ nth moment hexagon signatures from Stevanovic: H0 =     0, H1 =     0, H2 =     0
+
+  0 Stone-Wales patterns found:
+ (
+
+ Reti-Laszlo topological analysis using Stone-Wales patterns:
+ Pentagon arm indices: (12, 0, 0, 0, 0, 0) SUM= 12
+ M1=     0.00, M2=     0.00, NA=  0, NP+NA= 30
+ Fullerene is 0-balanced
+
+ No Yoshida-Fowler D3h 6555 pattern (C60-like corner patch) found
+
+ No Yoshida-Fowler D3h 666555 pattern (C80-like corner patch) found
+
+ No B-F D2h 55-6-55 pattern found
+
+ Calculate Standard Enthalpy for fullerene from structural motifs (M)
+  M.Alcami, G.Sanchez, S.Diaz-Tendero, Y.Wang, F.Martin, J. Nanosci. Nanotech. 7, 1329 (2007)
+ Loop through all    30 edges.
+ Structural motifs for four connected compact rings:
+  pp-pp:    30, pp-hp:     0, pp-hh:     0
+  ph-pp:     0, ph-hp:     0, ph-hh:     0
+  hh-pp:     0, hh-hp:     0, hh-hh:     0
+ Enthalpy of formation:      594.000 kcal/mol (per bond:       19.800 kcal/mol)
+ H(C60)/60 - H(C20)/20          18.800 kcal/mol
+       (graphene limit:       -9.430 kcal/mol)
+--------------------------------------------------------------------------------------------------------------------------------------------
+ --> Enter Subroutine SPIRALSEARCH   
+
+ Modified spiral algorithm Fowler and Manolopoulos (An Atlas of Fullerenes, Dover Publ., New York, 2006)
+ Spiral for fullerene isomers of C20: (12 faces)
+ Loop over (5,5) fusions,    60 max in total
+  Spiral found, avoid counting of spirals 
+  WARNING: output contains only 1 spiral! Set ispsearch=2 to get the complete spiral count.
+       1 distinct RSPIs found out of total      1 (maximum possible:     120)
+       1 spirals with a pentagon start   (      1  symmetry distinct)
+  Order of the Group:         120
+       1 RSPIs taken from spiral list to be analyzed:
+ Point group   Ring spiral pentagon positions                                          NMR pattern (for fullerene in ideal symmetry)
+ -----------------------------------------------------------------------------------------------------------------------------------
+  Ih              1     2     3     4     5     6     7     8     9    10    11    12     1 x  20
+ -----------------------------------------------------------------------------------------------------------------------------------
+ Corresponding ring numbers:
+     1-    2-    3-    5-    6-    4-   11-    9-    7-    8-   12-   10-
+ Spiral is canonical
+ Canonical spiral list of hexagons and pentagons:
+ 555555555555
+--------------------------------------------------------------------------------------------------------------------------------------------
+ --> Enter Subroutine TOPOLOINDICATOR
+
+ Topological Indicators for fullerene graph:
+ -------------------------------------------
+
+ For definitions see Vukicevic et al., Chem. Phys. Lett. 501, 442 (2011), and Behtoei et al., Appl. Math. Lett. 22, 1571 (2009)
+ Cn with n=   20
+ Wiener index W:                 500.
+ Hyper Wiener index WW:                1020.
+ Minimal vertex contribution to W: Wmin=                  50. Maximal vertex contribution to W: Wmax=                  50.
+ Reverse Wiener index n(n-1)D/2-W:                 450.
+ Average vertex contribution (wav): 0.500000000D+02
+ rho: 0.100000000D+01, rhoE: 0.100000000D+01
+ Zagreb index = nv*3^2 =          180 (trivial for regular fullerenes)
+ Schultz index = 6*W =                3000. (related to Wiener index for regular fullerenes)
+ Balaban index = 0.150000000D+01
+ Szeged index =                1920.
+ For the Estrada index see Subroutine Hueckel output
+ f*Wiener*Balaban = 4WB(n+4)/(9n^3) = 0.100000000D+01
+    (should be exactly 1.0 for cubic polyhedra with equal row sums in distance matrix, i.e. Wmin=Wmax)
+ Topological distances are between 1 and      5 (topological diameter D)
+ Topological radius R:      5, and average topological distance:     2.631579
+
+ Topological Indicators for dual fullerene graph:
+ ------------------------------------------------
+
+ Topological distance matrix M_p for pentagons:
+       0       1       1       1       2       2       2       3       1       2       1       2
+       1       0       1       1       1       1       2       2       2       3       2       2
+       1       1       0       2       1       2       1       2       1       2       2       3
+       1       1       2       0       2       1       3       2       2       2       1       1
+       2       1       1       2       0       1       1       1       2       2       3       2
+       2       1       2       1       1       0       2       1       3       2       2       1
+       2       2       1       3       1       2       0       1       1       1       2       2
+       3       2       2       2       1       1       1       0       2       1       2       1
+Polyhedron is equal to convex hull.
+       1       2       1       2       2       3       1       2       0       1       1       2
+       2       3       2       2       2       2       1       1       1       0       1       1
+       1       2       2       1       3       2       2       2       1       1       0       1
+       2       2       3       1       2       1       2       1       2       1       1       0
+
+ Mean topological pentagon distance:      1.63636364, and root mean square deviation:      0.05538835
+
+ Pentagon Wiener PW(M_p) =        108
+ Inverse Pentagon Wiener Index IPWI(M_p) =      0.00000000 (0 .le. IPWI .le. 1: 0 defines C20 and 1 the graphene limit)
+
+ For this vertex number we can have 1  icosahedral fullerene of Ih-symmetry
+--------------------------------------------------------------------------------------------------------------------------------------------
+ --> Enter Subroutine COORDBUILD     
+--------------------------------------------------------------------------------------------------------------------------------------------
+ --> Enter Subroutine VOLUME         
+
+  Volume and surface area of the dodecahedron: V= 0.20724235D+02 , A= 0.40075491D+02
+  Distance taken: R5= 0.139323D+01
+  Warning: Distances in 5-ring not the same,  difference is 0.210976D-01, taking the average distance of 0.139323D+01
+
+ Final result:
+ Total calculated volume of fullerene through tesselation from barycenter of polyhedron (valid for convex polyhedra): 0.20629679D+02
+          (Contributions from 5-ring: 0.20629679D+02 , and from 6-ring: 0.00000000D+00)
+    using     60 trigonal pyramidal tesselations
+  Deviation from spherical central covering: -.119331D+02  in percent: -.366465D+02
+  Exact volume of fullerene: 0.206297D+02
+  Convex hull volume of fullerene: 0.206986D+02
+  Ratio V(hull)/V(exact): 0.100334D+01
+
+ Total surface area of fullerene taken  from triangulation from barycenter of ring: 0.39962094D+02
+          (Contributions from 5-ring: 0.39962094D+02 , and from 6-ring: 0.00000000D+00)
+  Deviation from spherical central covering: -.935135D+01  in percent: -.189631D+02
+  Exact surface area of fullerene: 0.399621D+02
+  Convex hull surface area of fullerene: 0.399627D+02
+  Ratio A(hull)/A(exact): 0.100002D+01
+  Ratio Area/Volume: 0.193712D+01 (Tesselation), 0.193712D+01 (exact), 0.193069D+01 (convex hull)
+  Percent convexity:       99.999 (area)       99.889 (volume)
+--------------------------------------------------------------------------------------------------------------------------------------------
+ --> Enter Subroutine MINCOVSPHERE2  
+
+ Calculate the minimum covering sphere using the algorithm 2 given by E.A.Yildirim, SIAM Journal on Optimization 19(3), 1368 (2008):
+  Number of points in 3-D space:   20, epsilon for convergence: 0.200000D-07
+  Start search using the center of points and radius to furthest point from the center as initial guess
+  Cycle    0, nr. points:    2, convergence: 0.27526927D-01, Center of Sphere (X,Y,Z): -.416500D-02  0.193250D-01  -.129500D-02
+  Number of cycles     4709, nr. points:    4, convergence:     0.00000002, Center of Sphere (X,Y,Z): -.232267D-01  0.259873D-02  -.658605D-02
+  End of iteration
+  Center of minimum covering sphere (x,y,z):-.23226738D-01  0.25987341D-02  -.65860514D-02   at distance 0.24281903D-01  from origin
+
+  Final result and comparison (in units of input):
+  Volume of minimum covering sphere: 0.32028210D+02
+  Volume of central covering sphere: 0.32562802D+02
+  Volume of fullerene              : 0.20629679D+02
+  Area of minimum covering sphere  : 0.48772225D+02
+  Area of central covering sphere  : 0.49313441D+02
+  Area of fullerene                : 0.39962094D+02
+  Ratio area/volume of minimum covering sphere: 0.15227896D+01
+  Ratio area/volume of central covering sphere: 0.15144102D+01
+  Ratio area/volume of fullerene              : 0.19371167D+01
+  Ratio V(MCS)/V(cage)                        : 0.15525307D+01
+  Isoperimetric quotient (q_IP=36*PI*V^2/A^3) : 0.75421050D+00
+  Deformation parameter from q_IP (in %)      : 0.24578950D+02
+  Diaz-Tendero sphericity parameter divided by rotational constant A: 0.23789882D-01 (0.23789882D+01%)
+  Fowler asymmetry parameter       : 0.19394761D-02
+
+  Points on sphere (minimum 2, at most 4 points for     the algorithm) coordinates and distance:
+  P   6= -.48751500D+00  -.14818750D+01  -.12156950D+01    RMCS = 0.19700686D+01
+  P  13= 0.12894850D+01  -.65957500D+00  0.13047050D+01    RMCS = 0.19700686D+01
+  P  14= 0.11385000D-01  -.64607500D+00  0.18533050D+01    RMCS = 0.19700686D+01
+  P  20= -.10315000D-01  0.19726250D+01  -.62950000D-02    RMCS = 0.19700686D+01
+  Radius of minimum covering sphere: 0.19700686D+01
+
+  Van der Waals radius of carbon: 0.14150000D+01 Angstroem,  Van der Waals radius of fullerene: 0.33850686D+01 Angstroem
+  Van der Waals volume: 0.16247668D+03 Angstroem cube  (NB: Input coordinates need to be in Angstroem)
+  FCC Lattice constant: 0.95744199D+01 Angstroem, FCC volume: 0.21942061D+03 Angstroem cube, FCC volume: 0.13213809D+03 cm3/mol
+
+  Atom and distance from sphere:
+ (    1) -.1193D-01 (    2) -.1280D-01 (    3) -.3242D-03 (    4) -.3983D-01 (    5) -.6587D-02 (    6) -.1887D-07 (    7) -.7327D-01 (    8) -.7688D-01
+ (    9) -.5485D-02 (   10) -.2999D-01 (   11) -.5955D-01 (   12) -.5800D-02 (   13) 0.0000D+00 (   14) -.1853D-07 (   15) -.1771D-01 (   16) -.3108D-01
+ (   17) -.1542D-01 (   18) -.1614D-01 (   19) -.6728D-02 (   20) -.2434D-07 (
+
+  Final statistics:
+    Number of points:   20
+    Number of points on the sphere:    4
+    Number of points below the sphere:   16
+    Number of points above the sphere:    0
+
+    Largest vertex distance from sphere: -.768838D-01
+    Mean distance from sphere: -.204763D-01
+    Distortion (in percent) from the MCS relative to the  minimum bond distance: 0.148091D+01 for   20 atoms
+--------------------------------------------------------------------------------------------------------------------------------------------
+ --> Enter Subroutine MINDISTSPHERE  
+
+ Calculate the minimum distance sphere
+ Initial average radius: 0.194949D+01 taken from barycenter at (X,Y,Z): 0.00000000D+00  0.00000000D+00  0.00000000D+00
+
+ Initial values (in units of input):
+  Radius of minimum distance sphere: 0.19494897D+01
+  Volume of minimum distance sphere: 0.31034978D+02
+  Area of  minimum distance  sphere: 0.47758618D+02
+  Norm: 0.16503681D-01
+
+ Start Powell optimization
+ Fractional tolerance ftol =  0.10000D-07, dimension of problem n = 3
+ Start:       C(S): 0.00000000D+00 0.00000000D+00 0.00000000D+00  Norm: 0.16503681D-01
+ Iter:      1 C(S): -.97873010D-02 -.44780413D-02 0.53188999D-02  Norm: 0.15747036D-01
+ Iter:      2 C(S): -.84855926D-02 -.34731843D-02 0.53188999D-02  Norm: 0.15651215D-01
+ Iter:      3 C(S): -.78676872D-02 -.29961907D-02 0.53190773D-02  Norm: 0.15638432D-01
+ Iter:      4 C(S): -.78676871D-02 -.29961906D-02 0.53190773D-02  Norm: 0.15638432D-01
+
+ Final result after    4 iterations (in units of input): 
+ Center (x,y,z) of MDS: -.78676871D-02  -.29961906D-02  0.53190773D-02     Norm: 0.15638432D-01
+
+ Final values (in units of input):
+  Radius of minimum distance sphere:   0.19495091D+01
+  Volume of minimum distance sphere:   0.31035905D+02
+  Area of  minimum distance  sphere:   0.47759570D+02
+  Smallest point distance from center: 0.19129443D+01
+  MDS distortion parameter in percent: 0.81750583D+00
+--------------------------------------------------------------------------------------------------------------------------------------------
+ --> Enter Subroutine MAXINSPHERE    
+
+ Calculate the maximum inner sphere
+ Initial inner radius: 0.189318D+01 to point     8 taken from center of MCS at (X,Y,Z): -.23226738D-01  0.25987341D-02  -.65860514D-02
+
+ Initial values (in units of input):
+  Radius of maximum inner sphere: 0.18931848D+01
+  Volume of maximum inner sphere: 0.28422852D+02
+  Area   of maximum inner sphere: 0.45039742D+02
+
+ Start Powell optimization
+ Fractional tolerance ftol =  0.10000D-07, dimension of problem n = 3
+ Start:       C(S): -.23226738D-01 0.25987341D-02 -.65860514D-02  Norm: -.18931848D+01
+ Iter:      1 C(S): 0.16661068D-01 -.65152698D-02 -.65860514D-02  Norm: -.19227485D+01
+ Iter:      2 C(S): 0.16649509D-01 -.65152698D-02 -.65859638D-02  Norm: -.19227579D+01
+ Iter:      3 C(S): 0.16649498D-01 -.65152698D-02 -.65859638D-02  Norm: -.19227579D+01
+ Inner radius: 0.192276D+01 to point    15 taken from center of MIS at (X,Y,Z): 0.16649498D-01  -.65152698D-02  -.65859638D-02
+
+ Final values (in units of input):
+  Radius of maximum inner sphere: 0.19227579D+01
+  Volume of maximum inner sphere: 0.29775731D+02
+  Area   of maximum inner sphere: 0.46457847D+02
+
+ Subtracting Van der Waals radius of carbon   1.4150 gives VdW inner sphere radius of 0.50775792D+00 and volume of 0.54835112D+00
+--------------------------------------------------------------------------------------------------------------------------------------------
+ DATE: 14/ 9/2017          TIME: 18h 9m 8s
+ CPU Seconds:            0.10, CPU Hours:       0.00003

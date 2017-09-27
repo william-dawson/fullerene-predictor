@@ -6,6 +6,24 @@ from sphere import compute_sphere
 from triangle import compute_angle, compute_area
 
 ##########################################################################
+
+
+def compute_ring_connectivity(rings, rings_lookup):
+    ring_connectivity = []
+    for i in range(0, len(rings)):
+        temp_list = []
+        for j in range(0, len(rings[i])):
+            neighbor_ring = rings_lookup[rings[i][j]]
+            temp_list.extend(neighbor_ring)
+        temp_set = set(temp_list)
+        temp_set.remove(i)
+        ring_connectivity.append(list(temp_set))
+
+    return ring_connectivity
+
+##########################################################################
+
+
 def compute_energy(k_array, g_array):
     A = 2.62
     D = 1.41
@@ -13,11 +31,12 @@ def compute_energy(k_array, g_array):
     sum_value = 0
     for i in range(0, len(k_array)):
         sum_value = sum_value + 2 * k_array[i]**2 - (1 - alpha) * g_array[i]
-        # print(k_array[i]**2, g_array[i])
     sum_value = D * A * sum_value
     return sum_value
 
 ##########################################################################
+
+
 def compute_k_values(atoms, connect):
     k_values = []
     for i in range(0, len(atoms)):
@@ -28,23 +47,33 @@ def compute_k_values(atoms, connect):
         point_d = numpy.array(atoms[neighbors[2]])
 
         R = compute_sphere(point_a, point_b, point_c, point_d)
-        k_values.append(1.0/R)
+        k_values.append(1.0 / R)
 
     return k_values
 
 ##########################################################################
+
+
 def compute_g_values(atoms, connect, rings, rings_center, rings_lookup):
     A = 2.62
     g_values = []
+
+    rings_connectivity = compute_ring_connectivity(rings, rings_lookup)
 
     for i in range(0, len(atoms)):
         # Who are my vertex neighbors
         v0 = rings_lookup[i][0]
         v1 = rings_lookup[i][1]
         v2 = rings_lookup[i][2]
-        ring_positions_v0 = numpy.array([atoms[x] for x in rings[v0]])
-        ring_positions_v1 = numpy.array([atoms[x] for x in rings[v1]])
-        ring_positions_v2 = numpy.array([atoms[x] for x in rings[v2]])
+        neighbor_vertex_v0 = numpy.array(rings_connectivity[v0])
+        neighbor_vertex_v1 = numpy.array(rings_connectivity[v1])
+        neighbor_vertex_v2 = numpy.array(rings_connectivity[v2])
+        neighbor_vertex_positions_v0 = numpy.array([
+            rings_center[x] for x in neighbor_vertex_v0])
+        neighbor_vertex_positions_v1 = numpy.array([
+            rings_center[x] for x in neighbor_vertex_v1])
+        neighbor_vertex_positions_v2 = numpy.array([
+            rings_center[x] for x in neighbor_vertex_v2])
 
         # How many triangles surround each vertex neighbor
         n0 = len(rings[v0])
@@ -52,44 +81,44 @@ def compute_g_values(atoms, connect, rings, rings_center, rings_lookup):
         n2 = len(rings[v2])
 
         # For each vertex neighbor, what is its delta value
-        Del_V0 = 2*numpy.pi
-        Del_V1 = 2*numpy.pi
-        Del_V2 = 2*numpy.pi
+        Del_V0 = 2 * numpy.pi
+        Del_V1 = 2 * numpy.pi
+        Del_V2 = 2 * numpy.pi
 
-        shortest_rings = sort_points(rings[v0], ring_positions_v0)
-        for i in range(0,len(rings[v0])):
-            point1 = v0
-            point2 = shortest_rings[i]
-            point3 = shortest_rings[(i+1)%len(rings[v0])]
-            point1 = rings_center[v0]
-            point2 = atoms[point2]
-            point3 = atoms[point3]
+        shortest_rings = sort_points(neighbor_vertex_v0, neighbor_vertex_positions_v0)
+        for i in range(0, len(rings[v0])):
+            ring1 = v0
+            ring2 = shortest_rings[i]
+            ring3 = shortest_rings[(i + 1) % len(rings[v0])]
+            ring1_point = rings_center[v0]
+            ring2_point = rings_center[ring2]
+            ring3_point = rings_center[ring3]
 
-            Del_V0 = Del_V0 - (compute_angle(point1,point2,point3))
+            Del_V0 = Del_V0 - (compute_angle(ring1_point, ring2_point, ring3_point))
 
-        shortest_rings = sort_points(rings[v1], ring_positions_v1)
-        for i in range(0,len(rings[v1])):
-            point1 = v1
-            point2 = shortest_rings[i]
-            point3 = shortest_rings[(i+1)%len(rings[v1])]
-            point1 = rings_center[v1]
-            point2 = atoms[point2]
-            point3 = atoms[point3]
+        shortest_rings = sort_points(neighbor_vertex_v1, neighbor_vertex_positions_v1)
+        for i in range(0, len(rings[v1])):
+            ring1 = v1
+            ring2 = shortest_rings[i]
+            ring3 = shortest_rings[(i + 1) % len(rings[v1])]
+            ring1_point = rings_center[v1]
+            ring2_point = rings_center[ring2]
+            ring3_point = rings_center[ring3]
 
-            Del_V1 = Del_V1 - (compute_angle(point1,point2,point3))
+            Del_V1 = Del_V1 - (compute_angle(ring1_point, ring2_point, ring3_point))
 
-        shortest_rings = sort_points(rings[v2], ring_positions_v2)
-        for i in range(0,len(rings[v2])):
-            point1 = v2
-            point2 = shortest_rings[i]
-            point3 = shortest_rings[(i+1)%len(rings[v2])]
-            point1 = rings_center[v2]
-            point2 = atoms[point2]
-            point3 = atoms[point3]
+        shortest_rings = sort_points(neighbor_vertex_v2, neighbor_vertex_positions_v2)
+        for i in range(0, len(rings[v2])):
+            ring1 = v2
+            ring2 = shortest_rings[i]
+            ring3 = shortest_rings[(i + 1) % len(rings[v2])]
+            ring1_point = rings_center[v2]
+            ring2_point = rings_center[ring2]
+            ring3_point = rings_center[ring3]
 
-            Del_V2 = Del_V2 - (compute_angle(point1,point2,point3))
+            Del_V2 = Del_V2 - (compute_angle(ring1_point, ring2_point, ring3_point))
 
-        Del_P = Del_V0/n0 + Del_V1/n1 + Del_V2/n2
-        g_values.append(0.25*Del_P/A)
-    print(g_values)
+        Del_P = Del_V0 / n0 + Del_V1 / n1 + Del_V2 / n2
+        g_values.append(Del_P / A)
+
     return g_values

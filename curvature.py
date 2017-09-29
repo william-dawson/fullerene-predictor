@@ -61,13 +61,21 @@ def compute_g_values(atoms, connect, rings, rings_center, rings_lookup):
     rings_connectivity = compute_ring_connectivity(rings, rings_lookup)
 
     for i in range(0, len(atoms)):
-        # Who are my vertex neighbors
+        # Who are my three neighboring rings
         v0 = rings_lookup[i][0]
         v1 = rings_lookup[i][1]
         v2 = rings_lookup[i][2]
+
+        # What rings are connected to each of my neighbor rings
         neighbor_vertex_v0 = numpy.array(rings_connectivity[v0])
         neighbor_vertex_v1 = numpy.array(rings_connectivity[v1])
         neighbor_vertex_v2 = numpy.array(rings_connectivity[v2])
+        print(":::")
+        print(v0,neighbor_vertex_v0)
+        print(v1,neighbor_vertex_v1)
+        print(v2,neighbor_vertex_v2)
+
+        # And what is the center of those neighbor's neighbor rings
         neighbor_vertex_positions_v0 = numpy.array([
             rings_center[x] for x in neighbor_vertex_v0])
         neighbor_vertex_positions_v1 = numpy.array([
@@ -86,33 +94,33 @@ def compute_g_values(atoms, connect, rings, rings_center, rings_lookup):
         Del_V2 = 2 * numpy.pi
 
         shortest_rings = sort_points(neighbor_vertex_v0, neighbor_vertex_positions_v0)
-        for i in range(0, len(rings[v0])):
+        for j in range(0, len(rings[v0])):
             ring1 = v0
-            ring2 = shortest_rings[i]
-            ring3 = shortest_rings[(i + 1) % len(rings[v0])]
-            ring1_point = rings_center[v0]
+            ring2 = shortest_rings[j]
+            ring3 = shortest_rings[(j + 1) % len(rings[v0])]
+            ring1_point = rings_center[ring1]
             ring2_point = rings_center[ring2]
             ring3_point = rings_center[ring3]
 
             Del_V0 = Del_V0 - (compute_angle(ring1_point, ring2_point, ring3_point))
 
         shortest_rings = sort_points(neighbor_vertex_v1, neighbor_vertex_positions_v1)
-        for i in range(0, len(rings[v1])):
+        for j in range(0, len(rings[v1])):
             ring1 = v1
-            ring2 = shortest_rings[i]
-            ring3 = shortest_rings[(i + 1) % len(rings[v1])]
-            ring1_point = rings_center[v1]
+            ring2 = shortest_rings[j]
+            ring3 = shortest_rings[(j + 1) % len(rings[v1])]
+            ring1_point = rings_center[ring1]
             ring2_point = rings_center[ring2]
             ring3_point = rings_center[ring3]
 
             Del_V1 = Del_V1 - (compute_angle(ring1_point, ring2_point, ring3_point))
 
         shortest_rings = sort_points(neighbor_vertex_v2, neighbor_vertex_positions_v2)
-        for i in range(0, len(rings[v2])):
+        for j in range(0, len(rings[v2])):
             ring1 = v2
-            ring2 = shortest_rings[i]
-            ring3 = shortest_rings[(i + 1) % len(rings[v2])]
-            ring1_point = rings_center[v2]
+            ring2 = shortest_rings[j]
+            ring3 = shortest_rings[(j + 1) % len(rings[v2])]
+            ring1_point = rings_center[ring1]
             ring2_point = rings_center[ring2]
             ring3_point = rings_center[ring3]
 
@@ -120,5 +128,6 @@ def compute_g_values(atoms, connect, rings, rings_center, rings_lookup):
 
         Del_P = Del_V0 / n0 + Del_V1 / n1 + Del_V2 / n2
         g_values.append(Del_P / A)
+    # print(g_values)
 
     return g_values

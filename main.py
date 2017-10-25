@@ -17,7 +17,7 @@ if __name__ == "__main__":
 
     ring_center_list = fiverings_center.copy()
     ring_center_list.extend(sixrings_center)
-
+    
     ring_lookup = []
     for i in range(0, len(atoms_array)):
         ring_lookup.append([])

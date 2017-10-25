@@ -107,7 +107,7 @@ def process(file_name):
                 split = temp.split()
                 value_list = split[1:7]
                 sixrings.append([int(i) - 1 for i in value_list])
-                value_list = split[6:9]
+                value_list = split[7:10]
                 value_list[0] = value_list[0].replace('D', 'E')
                 value_list[1] = value_list[1].replace('D', 'E')
                 value_list[2] = value_list[2].replace('D', 'E')

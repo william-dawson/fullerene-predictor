@@ -4,6 +4,7 @@ import scipy
 import scipy.sparse.csgraph
 # from tsp_solver.greedy import solve_tsp
 import itertools
+from sympy import Point, Polygon
 
 ##########################################################################
 def path_length(point_position_pair):
@@ -33,5 +34,5 @@ def sort_points(points, points_positions):
             sorted_list = []
             for pp in perm:
                 sorted_list.append(pp[0])
-                
+
     return sorted_list

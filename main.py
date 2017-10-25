@@ -3,6 +3,7 @@ from sys import argv
 from curvature import compute_k_values, compute_g_values, compute_energy
 from process_input import process
 from sphere import compute_sphere
+import copy
 import numpy
 
 ##########################################################################
@@ -12,12 +13,12 @@ if __name__ == "__main__":
     atoms_array, connectivity, fiverings, sixrings, fiverings_center, \
         sixrings_center = process(file_name)
 
-    ring_list = fiverings.copy()
+    ring_list = copy.copy(fiverings)
     ring_list.extend(sixrings)
 
-    ring_center_list = fiverings_center.copy()
+    ring_center_list = copy.copy(fiverings_center)
     ring_center_list.extend(sixrings_center)
-    
+
     ring_lookup = []
     for i in range(0, len(atoms_array)):
         ring_lookup.append([])

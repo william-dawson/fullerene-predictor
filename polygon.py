@@ -2,9 +2,7 @@ import numpy
 import numpy.linalg
 import scipy
 import scipy.sparse.csgraph
-# from tsp_solver.greedy import solve_tsp
 import itertools
-from sympy import Point, Polygon
 
 ##########################################################################
 def path_length(point_position_pair):

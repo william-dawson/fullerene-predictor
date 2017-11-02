@@ -48,10 +48,10 @@ def compute_energy_novel(fullerene, k_array, g_array):
     sum_value = 0
     for i in range(0, len(fullerene.atoms_array)):
         # Determine the ring mixing coefficients
-        ring_list = fullerene.ring_lookup[i]
-        length1 = len(fullerene.ring_list[ring_list[0]])
-        length2 = len(fullerene.ring_list[ring_list[1]])
-        length3 = len(fullerene.ring_list[ring_list[2]])
+        atom_i_rings = fullerene.ring_lookup[i]
+        length1 = len(fullerene.ring_list[atom_i_rings[0]])
+        length2 = len(fullerene.ring_list[atom_i_rings[1]])
+        length3 = len(fullerene.ring_list[atom_i_rings[2]])
 
         # Compute mixing coefficients
         A, D, alpha = 0, 0, 0

@@ -1,9 +1,20 @@
+'''@package sphere helper routines related to spheres.
+'''
 import numpy
 import numpy.linalg
 
-##########################################################################
-# Given four points, this computes the radius on a sphere containing them
 def compute_sphere(point_a, point_b, point_c, point_d):
+    '''
+    compute_sphere Given four points, this computes the radius on a sphere
+    containing them.
+
+    point_a:
+    point_b:
+    point_c:
+    point_d:
+
+    return: radius of the sphere.
+    '''
     a0 = point_a[0]
     a1 = point_a[1]
     a2 = point_a[2]

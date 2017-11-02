@@ -1,15 +1,17 @@
-##########################################################################
-# This subroutine will read in the atoms, connectivity, and rings from
-# a fullerene program file
-def process(file_name):
-    # distance_unit = 0.529177
-    distance_unit = 1.0
+''' @package process_input helpers to build a fullerene from file.
+'''
+# distance_unit = 0.529177
+distance_unit = 1.0
+
+def process_atoms_array(file_name):
+    '''
+    process_atoms_array build a list of atoms.
+
+    file_name: name of the file to build from.
+
+    returns: list of atoms.
+    '''
     atoms_array = []
-    connectivity = []
-    fiverings = []
-    sixrings = []
-    fiverings_center = []
-    sixrings_center = []
     with open(file_name, 'r') as ifile:
         found_size = False
         while (not found_size):
@@ -31,8 +33,20 @@ def process(file_name):
             value_list[0] = value_list[0].replace('D', 'E')
             value_list[1] = value_list[1].replace('D', 'E')
             value_list[2] = value_list[2].replace('D', 'E')
-            atoms_array.append([distance_unit*float(i) for i in value_list])
+            atoms_array.append([distance_unit * float(i) for i in value_list])
+    return atoms_array
 
+
+def process_connectivity(file_name, number_of_atoms):
+    '''!
+    process_connectivity: determine what atoms are connected to each other.
+
+    file_name: name of the file to build from.
+    number_of_atoms: number of atoms in the Fullerene.
+
+    return: for each atom, which other atom is it connected to.
+    '''
+    connectivity = []
     with open(file_name, 'r') as ifile:
         found_conn = False
         while (not found_conn):
@@ -47,6 +61,19 @@ def process(file_name):
             value_list[2] = value_list[2][:-1]
             connectivity.append([int(i) - 1 for i in value_list])
 
+    return connectivity
+
+
+def process_5_rings(file_name):
+    '''!
+    process_5_rings: read in information about the rings with 5 atoms.
+
+    file_name: name of the file to build from.
+
+    return: a list of rings and the contained atoms, centers of the rings.
+    '''
+    fiverings = []
+    fiverings_center = []
     with open(file_name, 'r') as ifile:
         found_ring = False
         while (not found_ring):
@@ -59,19 +86,6 @@ def process(file_name):
                 found_ring = True
         split = temp.split()
         number_of_five_rings = int(split[0])
-
-    with open(file_name, 'r') as ifile:
-        found_ring = False
-        while (not found_ring):
-            try:
-                temp = next(ifile)
-            except:
-                number_of_six_rings = 0
-                exit
-            if "six-membered-rings" in temp:
-                found_ring = True
-        split = temp.split()
-        number_of_six_rings = int(split[0])
 
     if number_of_five_rings > 0:
         with open(file_name, 'r') as ifile:
@@ -91,8 +105,33 @@ def process(file_name):
                 value_list[0] = value_list[0].replace('D', 'E')
                 value_list[1] = value_list[1].replace('D', 'E')
                 value_list[2] = value_list[2].replace('D', 'E')
-                fiverings_center.append([distance_unit*float(i) for i in value_list])
+                fiverings_center.append(
+                    [distance_unit * float(i) for i in value_list])
+    return fiverings, fiverings_center
 
+
+def process_6_rings(file_name):
+    '''!
+    process_6_rings: read in information about the rings with 6 atoms.
+
+    file_name: name of the file to build from.
+
+    return: a list of rings and the contained atoms, centers of the rings.
+    '''
+    sixrings = []
+    sixrings_center = []
+    with open(file_name, 'r') as ifile:
+        found_ring = False
+        while (not found_ring):
+            try:
+                temp = next(ifile)
+            except:
+                number_of_six_rings = 0
+                exit
+            if "six-membered-rings" in temp:
+                found_ring = True
+        split = temp.split()
+        number_of_six_rings = int(split[0])
     if number_of_six_rings > 0:
         with open(file_name, 'r') as ifile:
             found_ring = False
@@ -111,7 +150,6 @@ def process(file_name):
                 value_list[0] = value_list[0].replace('D', 'E')
                 value_list[1] = value_list[1].replace('D', 'E')
                 value_list[2] = value_list[2].replace('D', 'E')
-                sixrings_center.append([distance_unit*float(i) for i in value_list])
-
-    return atoms_array, connectivity, fiverings, sixrings, fiverings_center,\
-        sixrings_center
+                sixrings_center.append(
+                    [distance_unit * float(i) for i in value_list])
+    return sixrings, sixrings_center

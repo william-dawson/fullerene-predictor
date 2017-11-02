@@ -2,6 +2,7 @@
 Predict the properties of fullerenes based on geometric criteria.
 
 ## Generating Input Files
+🤷🏻‍
 
 ## How To Run
 Example:
@@ -11,5 +12,5 @@ Example:
 ## References
 
 > Guan, Jie, Zhongqi Jin, Zhen Zhu, Chern Chuang, Bih-Yaw Jin, and David
-Tománek. "Local curvature and stability of two-dimensional systems." Physical
-Review B 90, no. 24 (2014): 245403.
+> Tománek. "Local curvature and stability of two-dimensional systems." Physical
+> Review B 90, no. 24 (2014): 245403.

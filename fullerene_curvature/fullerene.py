@@ -2,8 +2,8 @@
 A class that stores information about a Fullerene.
 '''
 import copy
-from process_input import process_atoms_array, process_connectivity, \
-    process_5_rings, process_6_rings
+from fullerene_curvature.process_input import process_atoms_array, \
+    process_connectivity, process_5_rings, process_6_rings
 
 def compute_ring_connectivity(rings, rings_lookup):
     '''

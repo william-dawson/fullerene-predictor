@@ -1,12 +1,9 @@
 ''' @package main driver for the fullerene energy computer.
 '''
 from sys import argv
-from curvature import compute_k_values, compute_g_values, \
+from fullerene_curvature.curvature import compute_k_values, compute_g_values, \
     compute_energy, compute_energy_novel
-from fullerene import Fullerene
-from sphere import compute_sphere
-import copy
-import numpy
+from fullerene_curvature.fullerene import Fullerene
 
 if __name__ == "__main__":
     file_name = argv[1]

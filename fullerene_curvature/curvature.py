@@ -2,9 +2,9 @@
 Main routines to compute the curvature energy of a fullerene.
 '''
 import numpy
-from polygon import sort_points
-from sphere import compute_sphere
-from triangle import compute_angle
+from fullerene_curvature.polygon import sort_points
+from fullerene_curvature.sphere import compute_sphere
+from fullerene_curvature.triangle import compute_angle
 
 
 def compute_energy(k_array, g_array):

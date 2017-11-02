@@ -6,25 +6,6 @@ from fullerene_curvature.process_input import process_atoms_array, \
     process_connectivity, process_5_rings, process_6_rings
 
 
-def compute_ring_connectivity(rings, rings_lookup):
-    '''
-    compute_ring_connectivity determine which rings are connected to each other.
-
-    @param rings list of rings in the
-    '''
-    ring_connectivity = []
-    for i in range(0, len(rings)):
-        temp_list = []
-        for j in range(0, len(rings[i])):
-            neighbor_ring = rings_lookup[rings[i][j]]
-            temp_list.extend(neighbor_ring)
-        temp_set = set(temp_list)
-        temp_set.remove(i)
-        ring_connectivity.append(list(temp_set))
-
-    return ring_connectivity
-
-
 class Fullerene:
     '''!
     Stores a description of a given Fullerene system.
@@ -64,3 +45,21 @@ class Fullerene:
         ## Which rings are connected to which other rings.
         self.rings_connectivity = compute_ring_connectivity(self.ring_list,
                                                             self.ring_lookup)
+
+def compute_ring_connectivity(rings, rings_lookup):
+    '''
+    compute_ring_connectivity determine which rings are connected to each other.
+
+    @param rings list of rings in the
+    '''
+    ring_connectivity = []
+    for i in range(0, len(rings)):
+        temp_list = []
+        for j in range(0, len(rings[i])):
+            neighbor_ring = rings_lookup[rings[i][j]]
+            temp_list.extend(neighbor_ring)
+        temp_set = set(temp_list)
+        temp_set.remove(i)
+        ring_connectivity.append(list(temp_set))
+
+    return ring_connectivity

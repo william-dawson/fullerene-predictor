@@ -13,7 +13,7 @@ def compute_energy(k_array, g_array):
     Equation 5.
 
     @param k_array: K values (equation 6)
-    @param g_values: G values (equation 8)
+    @param g_array: G values (equation 8)
 
     @return: curvature energy
     '''
@@ -33,7 +33,7 @@ def compute_energy_novel(k_array, g_array):
     that take into account the different ring sizes.
 
     @param k_array: K values (equation 6)
-    @param g_values: G values (equation 8)
+    @param g_array: G values (equation 8)
 
     @return: curvature energy
     '''

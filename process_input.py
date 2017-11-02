@@ -111,7 +111,7 @@ def process(file_name):
                 value_list[0] = value_list[0].replace('D', 'E')
                 value_list[1] = value_list[1].replace('D', 'E')
                 value_list[2] = value_list[2].replace('D', 'E')
-                fiverings_center.append([distance_unit*float(i) for i in value_list])
+                sixrings_center.append([distance_unit*float(i) for i in value_list])
 
     return atoms_array, connectivity, fiverings, sixrings, fiverings_center,\
         sixrings_center

@@ -4,6 +4,7 @@ import numpy.linalg
 from polygon import sort_points
 from sphere import compute_sphere
 from triangle import compute_angle, compute_area
+from scipy.spatial import Delaunay
 
 ##########################################################################
 
@@ -53,6 +54,18 @@ def compute_k_values(atoms, connect):
 
 ##########################################################################
 
+def compute_g_values2(atoms, connect, rings, rings_center, rings_lookup):
+    A = 2.62
+    g_values = []
+    triangulation = Delaunay(atoms)
+
+    for i in range(0, len(atoms)):
+        current_triangle = triangulation.find_simplex(atoms[i])
+        # print(current_triangle)
+        pass
+    # print(triangulation.points)
+
+    return g_values
 
 def compute_g_values(atoms, connect, rings, rings_center, rings_lookup):
     A = 2.62

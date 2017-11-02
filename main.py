@@ -1,6 +1,6 @@
 ##########################################################################
 from sys import argv
-from curvature import compute_k_values, compute_g_values, compute_energy
+from curvature import compute_k_values, compute_g_values, compute_g_values2, compute_energy
 from process_input import process
 from sphere import compute_sphere
 import copy
@@ -29,6 +29,8 @@ if __name__ == "__main__":
     k_values = compute_k_values(atoms_array, connectivity)
     g_values = compute_g_values(
         atoms_array, connectivity, ring_list, ring_center_list, ring_lookup)
+
+    # print(g_values2)
     energy_value = compute_energy(k_values, g_values)
 
     print("Energy:", energy_value)

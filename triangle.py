@@ -9,7 +9,9 @@ def compute_angle(p1, p2, p3):
     d13 = numpy.linalg.norm(numpy.array(p1) - numpy.array(p3))
     d23 = numpy.linalg.norm(numpy.array(p2) - numpy.array(p3))
 
-    return numpy.arccos((d12**2 + d13**2 - d23**2) / (2 * d12 * d13))
+    return_value = numpy.arccos((d12**2 + d13**2 - d23**2) / (2 * d12 * d13))
+
+    return return_value
 
 ##########################################################################
 

@@ -12,6 +12,10 @@ def compute_energy(k_array, g_array):
     compute_energy compute the curvature energy using the K and G values.
     Equation 5.
 
+    \f[
+    \Delta E_C = DA\sum_i [ 2k_i^2 - (1 - \alpha)G_i ] .
+    \f]
+
     @param k_array: K values (equation 6)
     @param g_array: G values (equation 8)
 
@@ -78,6 +82,10 @@ def compute_k_values(fullerene):
 
     @param fullerene: Fullerene to process.
 
+    \f[
+    k = \frac{1}{R} .
+    \f]
+
     return: k value for each atom.
     '''
     k_values = []
@@ -99,6 +107,10 @@ def compute_g_values(fullerene):
     compute_g_values (equation 8)
 
     @param fullerene: Fullerene to process.
+
+    \f[
+    G(P) = \Delta P/A.
+    \f]
 
     return: g value for each atom.
     '''

@@ -6,6 +6,24 @@ from fullerene_curvature.polygon import sort_points
 from fullerene_curvature.sphere import compute_sphere
 from fullerene_curvature.triangle import compute_angle
 
+def compute_euler_characteristic(g_array):
+    '''!
+    compute_euler_characteristic Equation 9.
+
+    \f[
+    A \sum_{atoms} G(P_j) = 2\pi \chi
+    \f]
+
+    @param g_array: G values (equation 8)
+
+    return: euler characteristic (should be 2)
+    '''
+    A = 2.62
+    sum_value = 0
+    for i in range(0, len(g_array)):
+        sum_value = sum_value + g_array[i]
+    sum_value = A * sum_value/(2*numpy.pi)
+    return sum_value
 
 def compute_energy(k_array, g_array):
     '''!

@@ -8,6 +8,13 @@ from fullerene_curvature.sphere import compute_sphere
 from fullerene_curvature.triangle import compute_angle
 
 def plot_k(fullerene, ax, atom_number):
+    '''!
+    plot_k: visualization of the calculation of K
+
+    fullerene: to compute
+    ax: to plot on
+    atom_number: which atom to focus on
+    '''
     print("Plot_K_Legend:")
     print('''\tGreen: "Point on the Fullerene"''')
     print('''\tRed: "That point's nearest neighbors"''')
@@ -33,10 +40,17 @@ def plot_k(fullerene, ax, atom_number):
 
     ax.scatter(x_values, y_values, z_values, s=80, c='r')
 
-    ax.scatter(center[0],center[1],center[2], s=80, c='y')
+    ax.scatter(center[0],center[1],center[2], s=80, c='y', picker=5)
 
 
 def plot_g(fullerene, ax, atom_number):
+    '''!
+    plot_k: visualization of the calculation of G
+
+    fullerene: to compute
+    ax: to plot on
+    atom_number: which atom to focus on
+    '''
     print("Plot_G_Legend:")
     print('''\tGreen: "Point on the Fullerene"''')
     print('''\tColored_Dots: "Center of rings it participates in"''')

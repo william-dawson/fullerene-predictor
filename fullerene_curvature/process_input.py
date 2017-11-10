@@ -48,19 +48,35 @@ def process_connectivity(file_name, number_of_atoms):
     return: for each atom, which other atom is it connected to.
     '''
     connectivity = []
-    with open(file_name, 'r') as ifile:
-        found_conn = False
-        while (not found_conn):
+    try:
+        with open(file_name, 'r') as ifile:
+            found_conn = False
+            while (not found_conn):
+                temp = next(ifile)
+                if "Vertices permuted and connectivitie" in temp:
+                    found_conn = True
             temp = next(ifile)
-            if "Calculate all" in temp:
-                found_conn = True
-        temp = next(ifile)
-        for i in range(0, number_of_atoms):
+            for i in range(0, number_of_atoms):
+                temp = next(ifile)
+                split = temp.split()
+                value_list = split[2:5]
+                value_list[2] = value_list[2][:-1]
+                connectivity.append([int(i) - 1 for i in value_list])
+    except:
+        connectivity = []
+        with open(file_name, 'r') as ifile:
+            found_conn = False
+            while (not found_conn):
+                temp = next(ifile)
+                if "Calculate all" in temp:
+                    found_conn = True
             temp = next(ifile)
-            split = temp.split()
-            value_list = split[2:5]
-            value_list[2] = value_list[2][:-1]
-            connectivity.append([int(i) - 1 for i in value_list])
+            for i in range(0, number_of_atoms):
+                temp = next(ifile)
+                split = temp.split()
+                value_list = split[2:5]
+                value_list[2] = value_list[2][:-1]
+                connectivity.append([int(i) - 1 for i in value_list])
 
     return connectivity
 

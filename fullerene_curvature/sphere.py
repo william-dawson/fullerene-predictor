@@ -28,6 +28,8 @@ def compute_sphere(point_a, point_b, point_c, point_d):
     d1 = point_d[1]
     d2 = point_d[2]
 
+    print(point_a, point_b, point_c, point_d)
+
     left_matrix = [[a0 - b0, a1 - b1, a2 - b2],
                    [b0 - c0, b1 - c1, b2 - c2],
                    [c0 - d0, c1 - d1, c2 - d2]]

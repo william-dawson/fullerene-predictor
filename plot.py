@@ -13,6 +13,7 @@ def onpick(event):
 
 if __name__ == "__main__":
     file_name = argv[1]
+    atom_number = int(argv[2]) - 1
 
     input_fullerene = Fullerene(file_name)
 
@@ -45,8 +46,8 @@ if __name__ == "__main__":
     ax1.scatter(x_values, y_values, z_values, s=20, c='b', picker=5)
     ax2.scatter(x_values, y_values, z_values, s=20, c='b', picker=5)
 
-    plot_k(input_fullerene,ax1)
-    plot_g(input_fullerene,ax2)
+    plot_k(input_fullerene,ax1,atom_number)
+    plot_g(input_fullerene,ax2,atom_number)
 
     fig1.canvas.mpl_connect('pick_event', onpick)
     fig2.canvas.mpl_connect('pick_event', onpick)

@@ -19,5 +19,5 @@ if __name__ == "__main__":
 
         print("Energy:", energy_value)
         print("Euler_Characteristic:", euler_characteristic)
-    else:
+    except:
         print("Failed:", file_name)

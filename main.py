@@ -15,9 +15,6 @@ if __name__ == "__main__":
 
     euler_characteristic = compute_euler_characteristic(g_values)
     energy_value = compute_energy(k_values, g_values)
-    energy_value_novel = compute_energy_novel(
-        input_fullerene, k_values, g_values)
 
     print("Energy:", energy_value)
-    print("Energy_Novel:", energy_value_novel)
     print("Euler_Characteristic:", euler_characteristic)

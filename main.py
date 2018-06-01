@@ -2,7 +2,7 @@
 '''
 from sys import argv
 from fullerene_curvature.curvature import compute_k_values, compute_g_values, \
-    compute_energy, compute_energy_novel, compute_euler_characteristic
+    compute_energy, compute_euler_characteristic
 from fullerene_curvature.fullerene import Fullerene
 
 if __name__ == "__main__":

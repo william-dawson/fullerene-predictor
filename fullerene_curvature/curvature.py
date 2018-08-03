@@ -50,51 +50,6 @@ def compute_energy(k_array, g_array):
     return sum_value
 
 
-def compute_energy_novel(fullerene, k_array, g_array):
-    '''!
-    compute_energy_novel experimental ways to compute the curvature energy
-    that take into account the different ring sizes.
-
-    @param fullerene: the fullerne to calculate.
-    @param k_array: K values (equation 6)
-    @param g_array: G values (equation 8)
-
-    @return: curvature energy
-    '''
-    A5 = 1.7292
-    A6 = 2.62
-    D5 = 0.423
-    D6 = 1.41
-    alpha5 = 0.1155
-    alpha6 = 0.165
-
-    sum_value = 0
-    for i in range(0, len(fullerene.atoms_array)):
-        # Determine the ring mixing coefficients
-        atom_i_rings = fullerene.ring_lookup[i]
-        length1 = len(fullerene.ring_list[atom_i_rings[0]])
-        length2 = len(fullerene.ring_list[atom_i_rings[1]])
-        length3 = len(fullerene.ring_list[atom_i_rings[2]])
-
-        # Compute mixing coefficients
-        A, D, alpha = 0, 0, 0
-        for length in [length1, length2, length3]:
-            if length == 5:
-                A = A + A5 / 3.0
-                D = D + D5 / 3.0
-                alpha = alpha + alpha5 / 3.0
-            else:
-                A = A + A6 / 3.0
-                D = D + D6 / 3.0
-                alpha = alpha + alpha6 / 3.0
-
-        # Add to the sum
-        sum_value = sum_value + D * A * (2 *
-                                         k_array[i]**2 - ((1 - alpha) * g_array[i]))
-
-    return sum_value
-
-
 def compute_k_values(fullerene):
     '''!
     compute_k_values (equation 5)

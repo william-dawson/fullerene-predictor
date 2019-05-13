@@ -54,8 +54,7 @@ def compute_energy(k_array, g_array):
 
 def compute_bond_stress(fullerene, k_array, g_array):
     '''!
-    compute_site_energy compute the curvature energy at each atomic site
-    using the K and G values Equation 5.
+    compute_bond_stress estimate the stress between all pairs of bonds.
 
     \f[
     \Delta E_C = DA\sum_i [ 2k_i^2 - (1 - \alpha)G_i ] .
@@ -64,7 +63,7 @@ def compute_bond_stress(fullerene, k_array, g_array):
     @param k_array: K values (equation 6)
     @param g_array: G values (equation 8)
 
-    @return: curvature energy values at each site
+    @return: a dictionary mapping tuples of atoms to a stress value.
     '''
     site_array = []
     A = 2.62

@@ -7,6 +7,7 @@ from fullerene_curvature.polygon import sort_points
 from fullerene_curvature.sphere import compute_sphere
 from fullerene_curvature.triangle import compute_angle
 
+
 def compute_euler_characteristic(g_array):
     '''!
     compute_euler_characteristic Equation 9.
@@ -23,8 +24,9 @@ def compute_euler_characteristic(g_array):
     sum_value = 0
     for i in range(0, len(g_array)):
         sum_value = sum_value + g_array[i]
-    sum_value = A * sum_value/(2*numpy.pi)
+    sum_value = A * sum_value / (2 * numpy.pi)
     return sum_value
+
 
 def compute_energy(k_array, g_array):
     '''!
@@ -48,6 +50,36 @@ def compute_energy(k_array, g_array):
         sum_value = sum_value + 2 * k_array[i]**2 - ((1 - alpha) * g_array[i])
     sum_value = D * A * sum_value
     return sum_value
+
+
+def compute_bond_stress(fullerene, k_array, g_array):
+    '''!
+    compute_bond_stress estimate the stress between all pairs of bonds.
+
+    \f[
+    \Delta E_C = DA\sum_i [ 2k_i^2 - (1 - \alpha)G_i ] .
+    \f]
+
+    @param k_array: K values (equation 6)
+    @param g_array: G values (equation 8)
+
+    @return: a dictionary mapping tuples of atoms to a stress value.
+    '''
+    site_array = []
+    A = 2.62
+    D = 1.41
+    alpha = 0.165
+    for i in range(0, len(k_array)):
+        site_value = 2 * k_array[i]**2 - ((1 - alpha) * g_array[i])
+        site_array.append(D * A * site_value)
+
+    strain_dict = {}
+    for i in range(0, len(k_array)):
+        for neigh in fullerene.connectivity[i]:
+            if (neigh, i) not in strain_dict:
+                strain_dict[(i, neigh)] = site_array[neigh] + site_array[i]
+
+    return strain_dict
 
 
 def compute_k_values(fullerene):
@@ -74,6 +106,7 @@ def compute_k_values(fullerene):
         k_values.append(1.0 / R)
 
     return k_values
+
 
 def compute_g_values(fullerene):
     '''!

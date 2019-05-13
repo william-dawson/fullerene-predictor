@@ -19,31 +19,31 @@ class Fullerene:
         self: Fullerne to initialize.
         file_name: Filename to initialize from.
         '''
-        ## List of Atoms.
+        # List of Atoms.
         self.atoms_array = process_atoms_array(file_name)
 
-        ## Which atoms are connected to which other atoms.
+        # Which atoms are connected to which other atoms.
         self.connectivity = process_connectivity(file_name,
                                                  len(self.atoms_array))
         fiverings, fiverings_center = process_5_rings(file_name)
         sixrings, sixrings_center = process_6_rings(file_name)
 
-        ## List of rings in the fullerne
+        # List of rings in the fullerne
         self.ring_list = copy.copy(fiverings)
         self.ring_list.extend(sixrings)
 
-        ## Where the centers of each ring are.
+        # Where the centers of each ring are.
         self.ring_center = copy.copy(fiverings_center)
         self.ring_center.extend(sixrings_center)
 
-        ## Lookup the rings associated with an atom
+        # Lookup the rings associated with an atom
         self.ring_lookup = []
         for i in range(0, len(self.atoms_array)):
             self.ring_lookup.append([])
         for i in range(0, len(self.ring_list)):
             for atom in self.ring_list[i]:
                 self.ring_lookup[atom].append(i)
-        ## Which rings are connected to which other rings.
+        # Which rings are connected to which other rings.
         self.rings_connectivity = compute_ring_connectivity(self.ring_list,
                                                             self.ring_lookup)
 

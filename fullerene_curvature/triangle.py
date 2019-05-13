@@ -3,6 +3,7 @@
 import numpy
 import numpy.linalg
 
+
 def compute_angle(p1, p2, p3):
     '''
     compute_angle: compute angle 23 of triangle 123.

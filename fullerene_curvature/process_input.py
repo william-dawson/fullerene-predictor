@@ -1,8 +1,9 @@
 ''' @package process_input helpers to build a fullerene from file.
 '''
-## Switch to go to Bohr from Angstrom.
+# Switch to go to Bohr from Angstrom.
 distance_unit = 1.0
 # distance_unit = 0.529177
+
 
 def process_atoms_array(file_name):
     '''

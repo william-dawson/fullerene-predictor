@@ -3,6 +3,7 @@
 import numpy
 import numpy.linalg
 
+
 def compute_sphere(point_a, point_b, point_c, point_d):
     '''
     compute_sphere Given four points, this computes the radius on a sphere
@@ -32,10 +33,10 @@ def compute_sphere(point_a, point_b, point_c, point_d):
                    [b0 - c0, b1 - c1, b2 - c2],
                    [c0 - d0, c1 - d1, c2 - d2]]
 
-    right_0 = (a0**2 + a1**2 + a2**2 - b0**2 - b1**2 - b2**2)/2.0
-    right_1 = (b0**2 + b1**2 + b2**2 - c0**2 - c1**2 - c2**2)/2.0
-    right_2 = (c0**2 + c1**2 + c2**2 - d0**2 - d1**2 - d2**2)/2.0
-    right_array = [[right_0],[right_1],[right_2]]
+    right_0 = (a0**2 + a1**2 + a2**2 - b0**2 - b1**2 - b2**2) / 2.0
+    right_1 = (b0**2 + b1**2 + b2**2 - c0**2 - c1**2 - c2**2) / 2.0
+    right_2 = (c0**2 + c1**2 + c2**2 - d0**2 - d1**2 - d2**2) / 2.0
+    right_array = [[right_0], [right_1], [right_2]]
 
     left_array = numpy.dot(numpy.linalg.inv(left_matrix), right_array)
     left_array = left_array.T[0]

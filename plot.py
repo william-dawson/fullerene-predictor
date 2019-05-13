@@ -6,10 +6,12 @@ from fullerene_curvature.fullerene import Fullerene
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
+
 def onpick(event):
     ind = event.ind[0]
     x, y, z = event.artist._offsets3d
     print(ind, x[ind], y[ind], z[ind])
+
 
 if __name__ == "__main__":
     file_name = argv[1]
@@ -46,8 +48,8 @@ if __name__ == "__main__":
     ax1.scatter(x_values, y_values, z_values, s=20, c='b', picker=5)
     ax2.scatter(x_values, y_values, z_values, s=20, c='b', picker=5)
 
-    plot_k(input_fullerene,ax1,atom_number)
-    plot_g(input_fullerene,ax2,atom_number)
+    plot_k(input_fullerene, ax1, atom_number)
+    plot_g(input_fullerene, ax2, atom_number)
 
     fig1.canvas.mpl_connect('pick_event', onpick)
     fig2.canvas.mpl_connect('pick_event', onpick)

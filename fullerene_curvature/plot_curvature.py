@@ -7,6 +7,7 @@ from fullerene_curvature.polygon import sort_points
 from fullerene_curvature.sphere import compute_sphere
 from fullerene_curvature.triangle import compute_angle
 
+
 def plot_k(fullerene, ax, atom_number):
     '''!
     plot_k: visualization of the calculation of K
@@ -40,7 +41,7 @@ def plot_k(fullerene, ax, atom_number):
 
     ax.scatter(x_values, y_values, z_values, s=80, c='r')
 
-    ax.scatter(center[0],center[1],center[2], s=80, c='y', picker=5)
+    ax.scatter(center[0], center[1], center[2], s=80, c='y', picker=5)
 
 
 def plot_g(fullerene, ax, atom_number):

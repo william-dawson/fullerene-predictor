@@ -32,6 +32,6 @@ if __name__ == "__main__":
         from matplotlib import pyplot as plt
         sval = sorted(stressdict.values(), reverse=True)
         plt.plot(sval, 'bx--')
-        plt.plot(sval[:num_bonds], 'ro--', label=str(num_bonds)+ " largest")
+        plt.plot(sval[:num_bonds], 'ro--', label=str(num_bonds) + " largest")
         plt.legend()
         plt.show()

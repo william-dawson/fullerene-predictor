@@ -3,7 +3,6 @@
 
 import numpy.linalg
 import scipy
-import scipy.sparse.csgraph
 import itertools
 
 

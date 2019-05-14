@@ -2,10 +2,8 @@
 Visualize the calculation of the curvature
 '''
 import numpy
-import random
 from fullerene_curvature.polygon import sort_points
 from fullerene_curvature.sphere import compute_sphere
-from fullerene_curvature.triangle import compute_angle
 
 
 def plot_k(fullerene, ax, atom_number):

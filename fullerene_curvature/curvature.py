@@ -2,7 +2,6 @@
 Main routines to compute the curvature energy of a fullerene.
 '''
 import numpy
-import random
 from fullerene_curvature.polygon import sort_points
 from fullerene_curvature.sphere import compute_sphere
 from fullerene_curvature.triangle import compute_angle
@@ -52,7 +51,7 @@ def compute_energy(k_array, g_array):
     return sum_value
 
 
-def compute_bond_stress(fullerene, k_array, g_array):
+def compute_bond_stress(fullerene, k_array, g_array, kernel, beta):
     '''!
     compute_bond_stress estimate the stress between all pairs of bonds.
 
@@ -62,9 +61,13 @@ def compute_bond_stress(fullerene, k_array, g_array):
 
     @param k_array: K values (equation 6)
     @param g_array: G values (equation 8)
+    @param kernel: which kernel to use ("I", "EXP", "INV")
+    @param beta: the inverse temperature.
 
     @return: a dictionary mapping tuples of atoms to a stress value.
     '''
+    from numpy import zeros, exp
+    from scipy.linalg import funm
     site_array = []
     A = 2.62
     D = 1.41
@@ -73,11 +76,23 @@ def compute_bond_stress(fullerene, k_array, g_array):
         site_value = 2 * k_array[i]**2 - ((1 - alpha) * g_array[i])
         site_array.append(D * A * site_value)
 
+    strain_matrix = zeros((len(k_array), len(k_array)))
+
+    for i in range(0, len(k_array)):
+        for neigh in fullerene.connectivity[i]:
+            strain_matrix[i, neigh] = 0.5*(site_array[neigh] + site_array[i])
+        strain_matrix[i, i] = site_array[i]
+
+    if kernel == "EXP":
+        strain_matrix = funm(strain_matrix, lambda x: exp(beta*x))
+    elif kernel == "INV":
+        strain_matrix = funm(strain_matrix, lambda x: -1.0/(1.0 - beta*x))
+
     strain_dict = {}
     for i in range(0, len(k_array)):
         for neigh in fullerene.connectivity[i]:
             if (neigh, i) not in strain_dict:
-                strain_dict[(i, neigh)] = site_array[neigh] + site_array[i]
+                strain_dict[(i, neigh)] = strain_matrix[i, neigh]
 
     return strain_dict
 

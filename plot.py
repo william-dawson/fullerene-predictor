@@ -4,7 +4,6 @@ from sys import argv
 from fullerene_curvature.plot_curvature import plot_k, plot_g
 from fullerene_curvature.fullerene import Fullerene
 import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
 
 
 def onpick(event):

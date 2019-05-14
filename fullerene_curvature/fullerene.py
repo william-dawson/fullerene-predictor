@@ -67,7 +67,8 @@ class Fullerene:
 
 def compute_ring_connectivity(rings, rings_lookup):
     '''
-    compute_ring_connectivity determine which rings are connected to each other.
+    compute_ring_connectivity determine which rings are connected to each
+      other.
 
     @param rings list of rings in the
     '''

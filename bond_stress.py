@@ -14,7 +14,8 @@ if __name__ == "__main__":
                         type=int)
     parser.add_argument("--plot", help="whether to plot or not",
                         action="store_true")
-    parser.add_argument("--kernel", help="which kernel to use", default="I")
+    parser.add_argument("--kernel", help="which kernel to use", default="I",
+                        choices=["INV", "EXP", "I"])
     parser.add_argument("--beta", help="the scaling factor", type=float,
                         default=1.0)
     parser.add_argument("--check", help="the actual bond to check against",

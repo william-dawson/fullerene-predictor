@@ -34,7 +34,8 @@ def visualize(mol, stressdict, largest, check):
         x_values = [mol.atoms_array[link[0]][0], mol.atoms_array[link[1]][0]]
         y_values = [mol.atoms_array[link[0]][1], mol.atoms_array[link[1]][1]]
         z_values = [mol.atoms_array[link[0]][2], mol.atoms_array[link[1]][2]]
-        ax1.plot3D(x_values, y_values, z_values, 'r')
+        ax1.plot3D(x_values, y_values, z_values, 'r',
+                   label=str(len(largest)) + " largest")
 
     if check:
         checkval = [int(check[0]) - 1, int(check[1]) - 1]
@@ -44,8 +45,9 @@ def visualize(mol, stressdict, largest, check):
                     [1], mol.atoms_array[checkval[1]][1]]
         z_values = [mol.atoms_array[checkval[0]]
                     [2], mol.atoms_array[checkval[1]][2]]
-        ax1.plot3D(x_values, y_values, z_values, 'y')
+        ax1.plot3D(x_values, y_values, z_values, 'y', label="check")
 
+    ax1.legend()
     plt.show()
 
 

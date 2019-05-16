@@ -6,6 +6,49 @@ from fullerene_curvature.curvature import compute_k_values, compute_g_values, \
     compute_bond_stress
 from fullerene_curvature.fullerene import Fullerene
 
+
+def visualize(mol, stressdict, largest, check):
+    from mpl_toolkits.mplot3d import Axes3D
+    import matplotlib.pyplot as plt
+
+    fig1 = plt.figure()
+    ax1 = fig1.add_subplot(111, projection='3d')
+    for ring in mol.ring_list:
+        for i in range(1, len(ring)):
+            x_values = [mol.atoms_array[ring[i - 1]]
+                        [0], mol.atoms_array[ring[i]][0]]
+            y_values = [mol.atoms_array[ring[i - 1]]
+                        [1], mol.atoms_array[ring[i]][1]]
+            z_values = [mol.atoms_array[ring[i - 1]]
+                        [2], mol.atoms_array[ring[i]][2]]
+            ax1.plot3D(x_values, y_values, z_values, 'b')
+        x_values = [mol.atoms_array[ring[-1]]
+                    [0], mol.atoms_array[ring[0]][0]]
+        y_values = [mol.atoms_array[ring[-1]]
+                    [1], mol.atoms_array[ring[0]][1]]
+        z_values = [mol.atoms_array[ring[-1]]
+                    [2], mol.atoms_array[ring[0]][2]]
+        ax1.plot3D(x_values, y_values, z_values, 'b')
+
+    for link in largest:
+        x_values = [mol.atoms_array[link[0]][0], mol.atoms_array[link[1]][0]]
+        y_values = [mol.atoms_array[link[0]][1], mol.atoms_array[link[1]][1]]
+        z_values = [mol.atoms_array[link[0]][2], mol.atoms_array[link[1]][2]]
+        ax1.plot3D(x_values, y_values, z_values, 'r')
+
+    if check:
+        checkval = [int(check[0]) - 1, int(check[1]) - 1]
+        x_values = [mol.atoms_array[checkval[0]]
+                    [0], mol.atoms_array[checkval[1]][0]]
+        y_values = [mol.atoms_array[checkval[0]]
+                    [1], mol.atoms_array[checkval[1]][1]]
+        z_values = [mol.atoms_array[checkval[0]]
+                    [2], mol.atoms_array[checkval[1]][2]]
+        ax1.plot3D(x_values, y_values, z_values, 'y')
+
+    plt.show()
+
+
 if __name__ == "__main__":
     # Setup the argument parser
     parser = ArgumentParser(description="Process the input parameters")
@@ -14,6 +57,8 @@ if __name__ == "__main__":
                         type=int)
     parser.add_argument("--plot", help="whether to plot or not",
                         action="store_true")
+    parser.add_argument("--plot3d", help="whether to plot or not",
+                        action="store_true")
     parser.add_argument("--kernel", help="which kernel to use", default="I",
                         choices=["INV", "EXP", "I"])
     parser.add_argument("--beta", help="the scaling factor", type=float,
@@ -21,6 +66,10 @@ if __name__ == "__main__":
     parser.add_argument("--check", help="the actual bond to check against",
                         action='append', default=None)
     args = parser.parse_args()
+
+    if args.check and len(args.check) < 2:
+        print("You need to specify two check values")
+        quit()
 
     input_fullerene = Fullerene(args.filename)
 
@@ -52,6 +101,9 @@ if __name__ == "__main__":
                  label=str(args.num_bonds) + " largest")
         if args.check:
             plt.hlines(checkval, 0, len(sval), label="check",
-                       linestyle="dotted", colors="r")
+                       linestyle="dotted", colors="y")
         plt.legend()
         plt.show()
+
+    if args.plot3d:
+        visualize(input_fullerene, stressdict, largest, args.check)

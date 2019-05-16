@@ -93,6 +93,8 @@ def compute_bond_stress(fullerene, k_array, g_array, kernel, beta):
         for neigh in fullerene.connectivity[i]:
             if (neigh, i) not in strain_dict:
                 strain_dict[(i, neigh)] = strain_matrix[i, neigh]
+                if kernel == "INV":
+                    strain_dict[(i, neigh)] = 1.0/strain_dict[(i, neigh)] 
 
     return strain_dict
 

@@ -1,5 +1,6 @@
 ''' @package driver which computes the stress on a bond
 '''
+from __future__ import print_function
 from argparse import ArgumentParser
 from fullerene_curvature.curvature import compute_k_values, compute_g_values, \
     compute_bond_stress
@@ -16,6 +17,8 @@ if __name__ == "__main__":
     parser.add_argument("--kernel", help="which kernel to use", default="I")
     parser.add_argument("--beta", help="the scaling factor", type=float,
                         default=1.0)
+    parser.add_argument("--check", help="the actual bond to check against",
+                        action='append', default=None)
     args = parser.parse_args()
 
     input_fullerene = Fullerene(args.filename)
@@ -31,7 +34,14 @@ if __name__ == "__main__":
                      reverse=True)[:args.num_bonds]
     print("Largest values:")
     for i in range(0, args.num_bonds):
-        print(largest[i], ":", stressdict[largest[i]])
+        print(str(largest[i][0] + 1) + "," +
+              str(largest[i][1] + 1), ":", stressdict[largest[i]])
+
+    if args.check:
+        check1 = int(args.check[0]) - 1
+        check2 = int(args.check[1]) - 1
+        checkval = stressdict[(check1, check2)]
+        print("Check value:", checkval)
 
     if args.plot:
         from matplotlib import pyplot as plt
@@ -39,5 +49,8 @@ if __name__ == "__main__":
         plt.plot(sval, 'bx--')
         plt.plot(sval[:args.num_bonds], 'ro--',
                  label=str(args.num_bonds) + " largest")
+        if args.check:
+            plt.hlines(checkval, 0, len(sval), label="check",
+                       linestyle="dotted", colors="r")
         plt.legend()
         plt.show()

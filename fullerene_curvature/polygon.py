@@ -2,7 +2,6 @@
 '''
 
 import numpy.linalg
-import scipy
 import itertools
 
 

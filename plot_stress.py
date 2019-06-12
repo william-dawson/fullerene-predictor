@@ -18,9 +18,7 @@ if __name__ == "__main__":
     input_fullerene = Fullerene(file_name)
 
     fig1 = plt.figure()
-    # fig2 = plt.figure()
     ax1 = fig1.add_subplot(111, projection='3d')
-    # ax2 = fig2.add_subplot(111, projection='3d')
 
     for ring in input_fullerene.ring_list:
         for i in range(1, len(ring)):
@@ -38,18 +36,6 @@ if __name__ == "__main__":
         z_values = [input_fullerene.atoms_array[ring[-1]]
                     [2], input_fullerene.atoms_array[ring[0]][2]]
         ax1.plot3D(x_values, y_values, z_values, 'k')
-        # x_values = []
-        # y_values = []
-        # z_values = []
-        # for i in ring:
-        #     x_values.append(input_fullerene.atoms_array[i][0])
-        #     y_values.append(input_fullerene.atoms_array[i][1])
-        #     z_values.append(input_fullerene.atoms_array[i][2])
-        # x_values.append(input_fullerene.atoms_array[ring[0]][0])
-        # y_values.append(input_fullerene.atoms_array[ring[0]][1])
-        # z_values.append(input_fullerene.atoms_array[ring[0]][2])
-        # ax1.plot_wireframe(x_values, y_values, z_values)
-        # ax2.plot_wireframe(x_values, y_values, z_values)
 
     x_values = []
     y_values = []
@@ -59,19 +45,9 @@ if __name__ == "__main__":
         y_values.append(point[1])
         z_values.append(point[2])
     ax1.scatter(x_values, y_values, z_values, s=20, c='b', picker=5)
-    # ax2.scatter(x_values, y_values, z_values, s=20, c='b', picker=5)
-
-    # plot_k(input_fullerene, ax1, atom_number)
-    # plot_g(input_fullerene, ax2, atom_number)
-
-    # fig1.canvas.mpl_connect('pick_event', onpick)
-    # fig2.canvas.mpl_connect('pick_event', onpick)
 
     ax1.set_xlim3d(-4, 4)
     ax1.set_ylim3d(-4, 4)
     ax1.set_zlim3d(-4, 4)
-    # ax2.set_xlim3d(-4, 4)
-    # ax2.set_ylim3d(-4, 4)
-    # ax2.set_zlim3d(-4, 4)
 
     plt.show()

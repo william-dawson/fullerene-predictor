@@ -2,13 +2,12 @@
 '''
 from __future__ import print_function
 from argparse import ArgumentParser
-from fullerene_curvature.curvature import compute_k_values, compute_g_values, \
-    compute_bond_stress
+from fullerene_curvature.curvature import compute_k_values, compute_g_values
+from fullerene_curvature.stress import compute_bond_stress
 from fullerene_curvature.fullerene import Fullerene
 
 
 def visualize(mol, stressdict, largest, check):
-    from mpl_toolkits.mplot3d import Axes3D
     import matplotlib.pyplot as plt
     from matplotlib import cm
 

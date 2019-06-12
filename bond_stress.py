@@ -12,7 +12,7 @@ def visualize(mol, stressdict, largest, check):
     import matplotlib.pyplot as plt
     from matplotlib import cm
 
-    cmap = cm.get_cmap('cividis')
+    cmap = cm.get_cmap('Blues')
     left = min(stressdict.values())
     lr = max(stressdict.values()) - left
     scaledict = {x: (y - left) / lr for x, y in stressdict.items()}
@@ -29,14 +29,17 @@ def visualize(mol, stressdict, largest, check):
         z_values = [mol.atoms_array[checkval[0]]
                     [2], mol.atoms_array[checkval[1]][2]]
         ax1.plot3D(x_values, y_values, z_values,
-                   'k', label="check", linewidth=6)
+                   'k', label="check", linewidth=12)
 
-    for link in largest:
+    for i, link in enumerate(largest):
         x_values = [mol.atoms_array[link[0]][0], mol.atoms_array[link[1]][0]]
         y_values = [mol.atoms_array[link[0]][1], mol.atoms_array[link[1]][1]]
         z_values = [mol.atoms_array[link[0]][2], mol.atoms_array[link[1]][2]]
-        ax1.plot3D(x_values, y_values, z_values, 'r', linewidth=6,
-                   label=str(len(largest)) + " largest")
+        if i == 0:
+            ax1.plot3D(x_values, y_values, z_values, 'r', linewidth=6,
+                       label=str(len(largest)) + " largest")
+        else:
+            ax1.plot3D(x_values, y_values, z_values, 'r', linewidth=6)
 
     for ring in mol.ring_list:
         for i in range(1, len(ring)):

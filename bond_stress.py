@@ -10,32 +10,15 @@ from fullerene_curvature.fullerene import Fullerene
 def visualize(mol, stressdict, largest, check):
     from mpl_toolkits.mplot3d import Axes3D
     import matplotlib.pyplot as plt
+    from matplotlib import cm
+
+    cmap = cm.get_cmap('cividis')
+    left = min(stressdict.values())
+    lr = max(stressdict.values()) - left
+    scaledict = {x: (y - left) / lr for x, y in stressdict.items()}
 
     fig1 = plt.figure()
     ax1 = fig1.add_subplot(111, projection='3d')
-    for ring in mol.ring_list:
-        for i in range(1, len(ring)):
-            x_values = [mol.atoms_array[ring[i - 1]]
-                        [0], mol.atoms_array[ring[i]][0]]
-            y_values = [mol.atoms_array[ring[i - 1]]
-                        [1], mol.atoms_array[ring[i]][1]]
-            z_values = [mol.atoms_array[ring[i - 1]]
-                        [2], mol.atoms_array[ring[i]][2]]
-            ax1.plot3D(x_values, y_values, z_values, 'b')
-        x_values = [mol.atoms_array[ring[-1]]
-                    [0], mol.atoms_array[ring[0]][0]]
-        y_values = [mol.atoms_array[ring[-1]]
-                    [1], mol.atoms_array[ring[0]][1]]
-        z_values = [mol.atoms_array[ring[-1]]
-                    [2], mol.atoms_array[ring[0]][2]]
-        ax1.plot3D(x_values, y_values, z_values, 'b')
-
-    for link in largest:
-        x_values = [mol.atoms_array[link[0]][0], mol.atoms_array[link[1]][0]]
-        y_values = [mol.atoms_array[link[0]][1], mol.atoms_array[link[1]][1]]
-        z_values = [mol.atoms_array[link[0]][2], mol.atoms_array[link[1]][2]]
-        ax1.plot3D(x_values, y_values, z_values, 'r',
-                   label=str(len(largest)) + " largest")
 
     if check:
         checkval = [int(check[0]) - 1, int(check[1]) - 1]
@@ -45,7 +28,40 @@ def visualize(mol, stressdict, largest, check):
                     [1], mol.atoms_array[checkval[1]][1]]
         z_values = [mol.atoms_array[checkval[0]]
                     [2], mol.atoms_array[checkval[1]][2]]
-        ax1.plot3D(x_values, y_values, z_values, 'y', label="check")
+        ax1.plot3D(x_values, y_values, z_values,
+                   'k', label="check", linewidth=6)
+
+    for link in largest:
+        x_values = [mol.atoms_array[link[0]][0], mol.atoms_array[link[1]][0]]
+        y_values = [mol.atoms_array[link[0]][1], mol.atoms_array[link[1]][1]]
+        z_values = [mol.atoms_array[link[0]][2], mol.atoms_array[link[1]][2]]
+        ax1.plot3D(x_values, y_values, z_values, 'r', linewidth=6,
+                   label=str(len(largest)) + " largest")
+
+    for ring in mol.ring_list:
+        for i in range(1, len(ring)):
+            vals = (mol.atoms_array[ring[i - 1]], mol.atoms_array[ring[i]])
+            x_values = [vals[0][0], vals[1][0]]
+            y_values = [vals[0][1], vals[1][1]]
+            z_values = [vals[0][2], vals[1][2]]
+            idx = (ring[i - 1], ring[i])
+            if idx in scaledict:
+                color = cmap(scaledict[idx])
+            else:
+                color = cmap(scaledict[(idx[1], idx[0])])
+            ax1.plot3D(x_values, y_values, z_values,
+                       color=color, marker="o", linestyle="--")
+        vals = (mol.atoms_array[ring[-1]], mol.atoms_array[ring[0]])
+        x_values = [vals[0][0], vals[1][0]]
+        y_values = [vals[0][1], vals[1][1]]
+        z_values = [vals[0][2], vals[1][2]]
+        idx = (ring[-1], ring[0])
+        if idx in scaledict:
+            color = cmap(scaledict[idx])
+        else:
+            color = cmap(scaledict[(idx[1], idx[0])])
+        ax1.plot3D(x_values, y_values, z_values,
+                   marker="o", color=color, linestyle="--")
 
     ax1.legend()
     plt.show()
@@ -62,7 +78,7 @@ if __name__ == "__main__":
     parser.add_argument("--plot3d", help="whether to plot or not",
                         action="store_true")
     parser.add_argument("--kernel", help="which kernel to use", default="I",
-                        choices=["INV", "EXP", "I"])
+                        choices=["INV", "EXP", "HAR", "I"])
     parser.add_argument("--beta", help="the scaling factor", type=float,
                         default=1.0)
     parser.add_argument("--check", help="the actual bond to check against",

@@ -3,8 +3,9 @@
 from __future__ import print_function
 from argparse import ArgumentParser
 from fullerene_curvature.curvature import compute_k_values, compute_g_values
-from fullerene_curvature.stress import compute_bond_stress
+from fullerene_curvature.stress import curvature_stress, distance_stress
 from fullerene_curvature.fullerene import Fullerene
+from mpl_toolkits.mplot3d import Axes3D
 
 
 def visualize(mol, stressdict, largest, check):
@@ -17,7 +18,7 @@ def visualize(mol, stressdict, largest, check):
     scaledict = {x: (y - left) / lr for x, y in stressdict.items()}
 
     fig1 = plt.figure()
-    ax1 = fig1.add_subplot(111, projection='3d')
+    ax1 = fig1.add_subplot(111, projection=Axes3D.name)
 
     if check:
         checkval = [int(check[0]) - 1, int(check[1]) - 1]
@@ -82,6 +83,8 @@ if __name__ == "__main__":
                         default=1.0)
     parser.add_argument("--check", help="the actual bond to check against",
                         action='append', default=None)
+    parser.add_argument("--weight", help="how to weight the bonds",
+                        default="curvature", choices=["curvature", "distance"])
     args = parser.parse_args()
 
     if args.check and len(args.check) < 2:
@@ -93,8 +96,11 @@ if __name__ == "__main__":
     k_values = compute_k_values(input_fullerene)
     g_values = compute_g_values(input_fullerene)
 
-    stressdict = compute_bond_stress(
-        input_fullerene, k_values, g_values, args.kernel, args.beta)
+    if args.weight == "curvature":
+        stressdict = curvature_stress(
+            input_fullerene, k_values, g_values, args.kernel, args.beta)
+    elif args.weight == "distance":
+        stressdict = distance_stress(input_fullerene, args.kernel, args.beta)
 
     # Find the largest values
     largest = sorted(stressdict, key=stressdict.get,

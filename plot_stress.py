@@ -3,7 +3,7 @@
 from sys import argv
 from fullerene_curvature.fullerene import Fullerene
 import matplotlib.pyplot as plt
-
+from mpl_toolkits.mplot3d import Axes3D
 
 def onpick(event):
     ind = event.ind[0]
@@ -18,7 +18,7 @@ if __name__ == "__main__":
     input_fullerene = Fullerene(file_name)
 
     fig1 = plt.figure()
-    ax1 = fig1.add_subplot(111, projection='3d')
+    ax1 = fig1.add_subplot(111, projection=Axes3D.name)
 
     for ring in input_fullerene.ring_list:
         for i in range(1, len(ring)):

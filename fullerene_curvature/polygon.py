@@ -1,10 +1,6 @@
 ''' @package polygon.py methods related to processing polygons.
 '''
 
-import numpy.linalg
-import itertools
-
-
 def path_length(point_position_pair):
     '''!
     point_position_pair compute the path length if we follow the points
@@ -14,14 +10,16 @@ def path_length(point_position_pair):
 
     return: length of the path
     '''
+    from numpy.linalg import norm
+
     length = 0
     for i in range(1, len(point_position_pair)):
         position1 = point_position_pair[i - 1][1]
         position2 = point_position_pair[i][1]
-        length = length + numpy.linalg.norm(position1 - position2)
+        length = length + norm(position1 - position2)
     position1 = point_position_pair[-1][1]
     position2 = point_position_pair[0][1]
-    length = length + numpy.linalg.norm(position1 - position2)
+    length = length + norm(position1 - position2)
     return length
 
 
@@ -35,11 +33,13 @@ def sort_points(points, points_positions):
 
     return: sorted list of points
     '''
+    from itertools import permutations
+
     point_position_pair = []
     for i in range(0, len(points)):
         point_position_pair.append([points[i], points_positions[i]])
 
-    perm_list = itertools.permutations(point_position_pair)
+    perm_list = permutations(point_position_pair)
     sorted_list = points.copy()
     shortest_length = 1e16
     for perm in perm_list:

@@ -14,11 +14,14 @@ def compute_angle(p1, p2, p3):
 
     return: angle value
     '''
-    d12 = numpy.linalg.norm(numpy.array(p1) - numpy.array(p2))
-    d13 = numpy.linalg.norm(numpy.array(p1) - numpy.array(p3))
-    d23 = numpy.linalg.norm(numpy.array(p2) - numpy.array(p3))
+    from numpy import array, arccos
+    from numpy.linalg import norm
 
-    return_value = numpy.arccos((d12**2 + d13**2 - d23**2) / (2 * d12 * d13))
+    d12 = norm(array(p1) - array(p2))
+    d13 = norm(array(p1) - array(p3))
+    d23 = norm(array(p2) - array(p3))
+
+    return_value = arccos((d12**2 + d13**2 - d23**2) / (2 * d12 * d13))
 
     return return_value
 
@@ -33,9 +36,12 @@ def compute_area(p1, p2, p3):
 
     return: area
     '''
-    d12 = numpy.linalg.norm(numpy.array(p1) - numpy.array(p2))
-    d13 = numpy.linalg.norm(numpy.array(p1) - numpy.array(p3))
-    d23 = numpy.linalg.norm(numpy.array(p2) - numpy.array(p3))
+    from numpy import array
+    from numpy.linalg import norm
+
+    d12 = norm(array(p1) - array(p2))
+    d13 = norm(array(p1) - array(p3))
+    d23 = norm(array(p2) - array(p3))
 
     s = 0.5 * (d12 + d13 + d23)
     return (s * (s - d12) * (s - d13) * (s - d23)) ** 0.5

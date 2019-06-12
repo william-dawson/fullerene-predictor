@@ -1,7 +1,6 @@
 ''' @package curvature.py
 Main routines to compute the curvature energy of a fullerene.
 '''
-import numpy
 from fullerene_curvature.polygon import sort_points
 from fullerene_curvature.sphere import compute_sphere
 from fullerene_curvature.triangle import compute_angle
@@ -19,11 +18,13 @@ def compute_euler_characteristic(g_array):
 
     return: euler characteristic (should be 2)
     '''
+    from numpy import pi
+
     A = 2.62
     sum_value = 0
     for i in range(0, len(g_array)):
         sum_value = sum_value + g_array[i]
-    sum_value = A * sum_value / (2 * numpy.pi)
+    sum_value = A * sum_value / (2 * pi)
     return sum_value
 
 
@@ -63,13 +64,15 @@ def compute_k_values(fullerene):
 
     return: k value for each atom.
     '''
+    from numpy import array
+
     k_values = []
     for i in range(0, len(fullerene.atoms_array)):
         neighbors = fullerene.connectivity[i]
-        point_a = numpy.array(fullerene.atoms_array[i])
-        point_b = numpy.array(fullerene.atoms_array[neighbors[0]])
-        point_c = numpy.array(fullerene.atoms_array[neighbors[1]])
-        point_d = numpy.array(fullerene.atoms_array[neighbors[2]])
+        point_a = array(fullerene.atoms_array[i])
+        point_b = array(fullerene.atoms_array[neighbors[0]])
+        point_c = array(fullerene.atoms_array[neighbors[1]])
+        point_d = array(fullerene.atoms_array[neighbors[2]])
 
         R, center = compute_sphere(point_a, point_b, point_c, point_d)
         k_values.append(1.0 / R)
@@ -89,6 +92,8 @@ def compute_g_values(fullerene):
 
     return: g value for each atom.
     '''
+    from numpy import array, pi
+
     A = 2.62
     g_values = []
 
@@ -99,16 +104,16 @@ def compute_g_values(fullerene):
         v2 = fullerene.ring_lookup[i][2]
 
         # What rings are connected to each of my neighbor rings
-        neighbor_vertex_v0 = numpy.array(fullerene.rings_connectivity[v0])
-        neighbor_vertex_v1 = numpy.array(fullerene.rings_connectivity[v1])
-        neighbor_vertex_v2 = numpy.array(fullerene.rings_connectivity[v2])
+        neighbor_vertex_v0 = array(fullerene.rings_connectivity[v0])
+        neighbor_vertex_v1 = array(fullerene.rings_connectivity[v1])
+        neighbor_vertex_v2 = array(fullerene.rings_connectivity[v2])
 
         # And what is the center of those neighbor's neighbor rings
-        neighbor_vertex_positions_v0 = numpy.array([
+        neighbor_vertex_positions_v0 = array([
             fullerene.ring_center[x] for x in neighbor_vertex_v0])
-        neighbor_vertex_positions_v1 = numpy.array([
+        neighbor_vertex_positions_v1 = array([
             fullerene.ring_center[x] for x in neighbor_vertex_v1])
-        neighbor_vertex_positions_v2 = numpy.array([
+        neighbor_vertex_positions_v2 = array([
             fullerene.ring_center[x] for x in neighbor_vertex_v2])
 
         # How many triangles surround each vertex neighbor
@@ -117,9 +122,9 @@ def compute_g_values(fullerene):
         n2 = len(fullerene.ring_list[v2])
 
         # For each vertex neighbor, what is its delta value
-        Del_V0 = 2 * numpy.pi
-        Del_V1 = 2 * numpy.pi
-        Del_V2 = 2 * numpy.pi
+        Del_V0 = 2 * pi
+        Del_V1 = 2 * pi
+        Del_V2 = 2 * pi
 
         shortest_rings = sort_points(
             neighbor_vertex_v0, neighbor_vertex_positions_v0)

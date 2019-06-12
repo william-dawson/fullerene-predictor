@@ -1,10 +1,8 @@
 ''' @package fullerene.py
 A class that stores information about a Fullerene.
 '''
-import copy
 from fullerene_curvature.process_input import process_atoms_array, \
     process_connectivity, process_5_rings, process_6_rings
-import numpy
 
 
 class Fullerene:
@@ -19,6 +17,8 @@ class Fullerene:
         self: Fullerne to initialize.
         file_name: Filename to initialize from.
         '''
+        import copy
+
         # List of Atoms.
         self.atoms_array = process_atoms_array(file_name)
 
@@ -47,21 +47,33 @@ class Fullerene:
         self.rings_connectivity = compute_ring_connectivity(self.ring_list,
                                                             self.ring_lookup)
 
-    def get_adjacency_matrix(self):
+    def get_adjacency_matrix(self, distance=False):
         '''
         get_adjacency_matrix get an adjacency matrix representation of the
         fullerene.
 
         @param self: Fullerene to process
+        @param distance: whether to scale entries by the distance or not.
 
         return: an adjacency matrix
         '''
+        from numpy.linalg import norm
+        from numpy import array, zeros
+
         matrix_dimension = len(self.atoms_array)
-        matrix = numpy.zeros((matrix_dimension, matrix_dimension))
+        matrix = zeros((matrix_dimension, matrix_dimension))
+
         for j in range(0, matrix_dimension):
+            a1 = self.atoms_array[j]
             for i in range(0, len(self.connectivity[j])):
                 index = self.connectivity[j][i]
-                matrix[j, index] = 1
+                if distance:
+                    a2 = self.atoms_array[index]
+                    matrix[j, index] = norm(array(a1) - array(a2))
+                    pass
+                else:
+                    matrix[j, index] = 1
+
         return matrix
 
 
